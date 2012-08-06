@@ -17,14 +17,7 @@
   </head>
   <body>
 
-    <div class="span8">
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-error"><%= alert %></p>
-      <% end %>
-    </div>
+
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -47,11 +40,26 @@
     </div>
 
     <div class="container">
+
+       <div class="span8">
+          <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert alert-error"><%= alert %></p>
+          <% end %>
+        </div>
+
       <div class="content">
         <div class="row">
            <div class="span9">
+
+
               <%= yield %>
+
             </div>
+
+
             <div class="span3">
               <div class="well sidebar-nav">
                 <h3>Sidebar</h3>
@@ -69,6 +77,8 @@
       <footer>
         <p>&copy; Company 2012</p>
       </footer>
+
+      <%= debug(params) if Rails.env.development? %>
 
     </div> <!-- /container -->
 
