@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  objective_id: 1
+  completed_at: 2012-08-06 15:55:47
+
+two:
+  objective_id: 1
+  completed_at: 2012-08-06 15:55:47
