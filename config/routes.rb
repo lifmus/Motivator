@@ -2,9 +2,11 @@ Motivator::Application.routes.draw do
 
   resources :goals
 
-  devise_for :users
+  # devise_for :users
 
   root :to => "goals#new"
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   end
 

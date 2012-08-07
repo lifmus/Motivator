@@ -3,7 +3,7 @@
 Devise.setup do |config|
 
   require "omniauth-facebook"
-  config.omniauth :facebook, "APP_ID", "APP_SECRET"
+  config.omniauth :facebook, "455972557770538", "4a8574a5be6fcc5f90568ee5f8b9978e"
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
