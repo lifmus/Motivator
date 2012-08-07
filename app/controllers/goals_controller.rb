@@ -34,7 +34,15 @@ class GoalsController < ApplicationController
   def update
     @goal = Goal.find(params[:id])
     @objective = Objective.find(params[:objective_id])
-    params[:days].each do |day|
+    params[:day].each do |key, value|
+
+      p value
+
+      @objective.steps.find_or_create_by_completed_at(:completed_at => value)
+
+
+      # Step.find_or_create_by_completed_at(value)
+
       # Step.find_or_create_by_completed_at(:completed_at => day, :objective_id => @objective.id)
     end
 

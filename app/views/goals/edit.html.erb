@@ -3,9 +3,9 @@
 <!-- TODO: TEST ME! -->
 <%= form_tag goal_path(@goal), :action => :update, :method => :put do %>
 <h2>When did you last <%= @objective.description %>?</h2>
-  <% @days.each do |day| %>
+  <% @days.each_with_index do |day, index| %>
     <div>
-      <%= check_box_tag "days[]", day, false %>
+      <%= check_box_tag "day[#{index + 1}]", day, false %>
       <%= day.strftime("%a %b #{day.day.ordinalize}") %>
     </div>
   <% end %>

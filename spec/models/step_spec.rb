@@ -10,6 +10,12 @@ describe Step do
   it { should belong_to(:objective)}
 
 
+  it "cannot enter duplicate entry with the same date and objective id" do
+    new_step = Step.create(:completed_at => @step.completed_at, :objective_id => @step.objective_id )
+    new_step.should_not be_valid
+  end
+
+
   it "throws an error if a step doesn't have a completed_at or objective_id" do
     expect { Step.create }.should raise_error
   end

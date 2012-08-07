@@ -26,6 +26,25 @@ describe "Goals pages" do
       it { should have_content('When did you') }
       it { should have_content(goal.due_date.strftime("%a %b #{goal.due_date.day.ordinalize}")) }
 
+      describe "mark things done" do
+        before do
+          find(:css, "#day_3").set(true)
+        end
+
+        it "should save the step" do
+          expect { click_link_or_button "Mark 'em done!" }.to change(Step, :count).by(1)
+        end
+
+        it "should redirect to the show page" do
+          click_link_or_button "Mark 'em done!"
+          page.should have_content('the show page')
+        end
+      end
+
+      # after do
+      #   click_button "Mark 'em done!"
+      # end
+
       # describe "'New Project' creates a new project in the database" do
       #         before do
       #           fill_in "Name", with: "Googly Moogly"
