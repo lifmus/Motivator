@@ -1,4 +1,4 @@
-<%= form_for(@goal) do |f| %>
+<%= form_for @goal do |f| %>
   <% if @goal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
@@ -11,29 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :due_date %><br />
-    <%= f.text_field :due_date %>
+
+  <div class="field goal_form">
+    My goal is to
+    <%= f.text_field :description, :class=>"input-xlarge goal_form" %> <br /><br />
+    by <%= f.text_field :due_date, :class=>"input-xlarge goal_form" %> <br /><br />
   </div>
 
 
   <%= f.fields_for :objectives do |objective_fields| %>
-   <div class="field">
-      <%= objective_fields.label :description %><br />
-      <%= objective_fields.text_field :description %>
-    </div>
-   <div class="field">
-      <%= objective_fields.label :frequency %><br />
-      <%= objective_fields.text_field :frequency %>
+   <div class="field goal_form">
+     And to achieve this, I will
+      <%= objective_fields.text_field :description, :class=>"input-xlarge goal_form" %> <br /><br />
+      at least
+      <%= objective_fields.text_field :frequency, :class=>"input-xlarge goal_form" %> <br /><br />times per week.
     </div>
   <% end %>
+  <br /><br />
 
-  <div class="actions">
-     <%= f.submit %>
+
+  <div class="actions goal_form">
+     <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form" %>
    </div>
 
 <% end %>
