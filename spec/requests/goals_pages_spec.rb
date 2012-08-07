@@ -4,7 +4,7 @@ require 'spec_helper'
 describe "Goals pages" do
   subject { page }
   let(:user) { Fabricate(:user) }
-  let(:goal) { Fabricate(:goal) }
+  let(:goal) { Fabricate(:goal_with_objective) }
 
   describe "goals#show" do
 
