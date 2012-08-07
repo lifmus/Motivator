@@ -6,7 +6,7 @@ describe "Goals pages" do
   let(:user) { Fabricate(:user) }
   let(:goal) { Fabricate(:goal_with_objective) }
 
-  describe "goals#show" do
+  describe "goals#edit" do
 
     describe "when logged out" do
       before { visit goal_path(goal) }
@@ -19,7 +19,7 @@ describe "Goals pages" do
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
         click_button "Sign in"
-        visit goal_path(goal)
+        visit edit_goal_path(goal)
       end
 
       it { should have_content(goal.description) }
