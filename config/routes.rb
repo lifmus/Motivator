@@ -1,6 +1,15 @@
 Motivator::Application.routes.draw do
 
-  resources :goals
+  get "objectives/_form"
+
+  get "objectives/new"
+
+  get "objectives/edit"
+
+  resources :goals do
+    resources :objectives
+  end
+
 
   # devise_for :users
 
