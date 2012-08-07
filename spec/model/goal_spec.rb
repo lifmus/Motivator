@@ -18,7 +18,7 @@ describe Goal do
   end
 
   it "creates a goal with a user, description, and due date" do
-    Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "is a great word").should be_valid
+    Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "go to the gym").should be_valid
   end
 
 end

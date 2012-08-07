@@ -11,36 +11,37 @@ describe "Goals pages" do
     describe "when logged out" do
       before { visit goal_path(goal) }
       it { should have_content('Sign in') }
-    end
+    end # when logged out
 
     describe "when logged in" do
-          before do
-            visit new_user_session_path
-            fill_in "Email", with: user.email
-            fill_in "Password", with: user.password
-            click_button "Sign in"
-            visit goal_path(goal)
-          end
-          it { should have_content(goal.description) }
-          it { should have_content('When did you') }
-          it { should have_content(goal.due_date) }
+      before do
+        visit new_user_session_path
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Sign in"
+        visit goal_path(goal)
+      end
 
-          # describe "'New Project' creates a new project in the database" do
-          #         before do
-          #           fill_in "Name", with: "Googly Moogly"
-          #           fill_in "Description", with: "F'in things up!"
-          #         end
-          #
-          #         it "should create the project" do
-          #           expect { click_button 'Create Project'}.to change(Project, :count).by(1)
-          #         end
-          #
-          #         describe "displays the project in the list of projects" do
-          #           before { click_button 'Create Project' }
-          #           it { should have_content("Googly Moogly") }
-          #           it { should have_content("F'in things up!") }
-          #         end
-                end
+      it { should have_content(goal.description) }
+      it { should have_content('When did you') }
+      it { should have_content(goal.due_date.strftime("%a %b #{goal.due_date.day.ordinalize}")) }
 
-  end
+      # describe "'New Project' creates a new project in the database" do
+      #         before do
+      #           fill_in "Name", with: "Googly Moogly"
+      #           fill_in "Description", with: "F'in things up!"
+      #         end
+      #
+      #         it "should create the project" do
+      #           expect { click_button 'Create Project'}.to change(Project, :count).by(1)
+      #         end
+      #
+      #         describe "displays the project in the list of projects" do
+      #           before { click_button 'Create Project' }
+      #           it { should have_content("Googly Moogly") }
+      #           it { should have_content("F'in things up!") }
+      #         end
+
+    end # when logged in
+  end # goals#show
 end
