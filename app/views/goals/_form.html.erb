@@ -14,17 +14,17 @@
 
   <div class="field goal_form">
     My goal is to
-    <%= f.text_field :description, :class=>"input-xlarge goal_form" %> <br /><br />
-    by <%= f.text_field :due_date, :class=>"input-xlarge goal_form" %> <br /><br />
+    <%= f.text_field :description, :class=>"input-xlarge", :placeholder=>"Become a world class Ruby programmer" %> <br /><br />
+    by <%= f.text_field :due_date, :class=>"input-xlarge", :placeholder=>"August 18, 2020"%> <br /><br />
   </div>
 
 
   <%= f.fields_for :objectives do |objective_fields| %>
    <div class="field goal_form">
      And to achieve this, I will
-      <%= objective_fields.text_field :description, :class=>"input-xlarge goal_form" %> <br /><br />
+      <%= objective_fields.text_field :description, :class=>"input-xlarge", :placeholder=>"Write 300 RSPEC tests"%> <br /><br />
       at least
-      <%= objective_fields.text_field :frequency, :class=>"input-xlarge goal_form" %> <br /><br />times per week.
+      <%= objective_fields.text_field :frequency, :class=>"input-xlarge", :placeholder=>"5" %> <br /><br />times per week.
     </div>
   <% end %>
   <br /><br />
