@@ -1,8 +1,10 @@
 Motivator::Application.routes.draw do
 
+  resources :goals
+
   devise_for :users
 
-  root :to => "home#index"
+  root :to => "goals#new"
 
   end
 
