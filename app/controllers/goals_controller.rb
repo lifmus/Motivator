@@ -3,9 +3,6 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
-    @objective = @goal.objectives.first #BUGBUG only works for one objective
-    @days = []
-    7.times { | num | @days << Time.now.at_beginning_of_week + num.days }
   end
 
   def new
@@ -28,6 +25,10 @@ class GoalsController < ApplicationController
   end
 
   def edit
+    @goal = Goal.find(params[:id])
+    @objective = @goal.objectives.first #BUGBUG only works for one objective
+    @days = []
+    7.times { | num | @days << Time.now.at_beginning_of_week + num.days }
   end
 
   def update
