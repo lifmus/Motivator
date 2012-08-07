@@ -13,11 +13,11 @@ describe Goal do
   it { should have_many(:objectives)}
   it { should have_many(:steps).through(:objectives) }
 
-  it "throws an error if a project doesn't have a user, description, or due date" do
+  it "throws an error if a goal doesn't have a user, description, or due date" do
     expect { Goal.create }.should raise_error
   end
 
-  it "creates a project with a user, description, and due date" do
+  it "creates a goal with a user, description, and due date" do
     Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "is a great word").should be_valid
   end
 
