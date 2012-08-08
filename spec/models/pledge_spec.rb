@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Pledge do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before { @pledge = Fabricate(:pledge) }
+  subject { @pledge }
+
+  it { should validate_presence_of(:goal_id) }
+  it { should validate_presence_of(:amount) }
+
 end
