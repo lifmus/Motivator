@@ -6,7 +6,7 @@ describe Objective do
 
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:frequency) }
-  it { should validate_presence_of(:goal_id) }
+  it { should validate_presence_of(:goal) }
   it { should respond_to(:frequency) }
   it { should respond_to(:description) }
   it { should have_many(:steps)}

@@ -18,4 +18,10 @@ class Goal < ActiveRecord::Base
     ((self.objectives.first.steps.count.to_f / expected_steps) * 100 ).floor
   end
 
+  def expected_percentage_complete
+    total_days = (self.due_date.to_date - self.created_at.to_date).to_i
+    elapsed_days = (Time.now.to_date - self.created_at.to_date).to_i
+    (elapsed_days.to_f / total_days) * 100
+  end
+
 end
