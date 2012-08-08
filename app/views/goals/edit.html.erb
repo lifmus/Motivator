@@ -1,18 +1,29 @@
 <h1>My goal is to <%= @goal.description %></h1>
 <h3>I will achieve this by <%= @goal.due_date.strftime("%a %b #{@goal.due_date.day.ordinalize}") %></h3>
 <!-- TODO: TEST ME! -->
-<%= form_tag goal_path(@goal), :action => :update, :method => :put do %>
+<%= form_tag goal_path(@goal), :action => :update, :method => :put, :class => "btn-group" do %>
 <h2>When did you last <%= @objective.description %>?</h2>
+  <div class="btn-group" data-toggle="buttons-checkbox">
   <% @days.each_with_index do |day, index| %>
-    <div>
+
       <% if day > Time.now %>
         <div style="color:grey"><%= day.strftime("%a %b #{day.day.ordinalize}") %></div>
       <% else %>
-        <div style="color:green"><%= day.strftime("%a %b #{day.day.ordinalize}") %>
-          <%= check_box_tag "day[#{index + 1}]", day, false %></div>
+        <button class="btn btn-steps"><%= day.strftime("%a %b #{day.day.ordinalize}") %></button>
+          <button class="btn"><%= check_box_tag "day[#{index + 1}]", day, false %></button>
       <% end %>
-    </div>
+
   <% end %>
   <%= hidden_field_tag :objective_id, @objective.id %>
   <%= submit_tag "Mark 'em done!", :class => "btn btn-primary" %>
+      </div>
 <% end %>
+
+
+
+<div class="btn-group" data-toggle="buttons-checkbox">
+  <% @days.each_with_index do |day, index| %>
+    <button class="btn-steps btn"><%= day.strftime("%a %b #{day.day.ordinalize}") %></button>
+  <% end %>
+</div>
+

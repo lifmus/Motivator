@@ -28,7 +28,7 @@ describe "Goals pages" do
 
       describe "mark things done" do
         before do
-          find(:css, "#day_3").set(true)
+          find(:css, "#day_1").set(true)
         end
 
         it "should save the step" do
