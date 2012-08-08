@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20120808230709) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "pledges", :force => true do |t|
+    t.integer  "goal_id"
+    t.decimal  "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
