@@ -1,3 +1,7 @@
 <h1>Make a new goal</h1>
 <br /><br />
-<%= render 'form' %>
+<% if !params[:pledge] %>
+  <%= render 'form' %>
+<% else %>
+  <%= render :partial => 'pledge' %>
+<% end %>

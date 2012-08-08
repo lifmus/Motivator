@@ -17,7 +17,9 @@ class GoalsController < ApplicationController
     else
       @goal.user = current_user
         if @goal.save
-         redirect_to @goal, notice: 'Goal was successfully created.'
+          render action: "new"
+         # redirect_to @goal, notice: 'Goal was successfully created.'
+         # We need to decide how to move forward - should we have both partials render on the new page? How do we redirect after the pledge partial?
         else
           render action: "new"
         end
