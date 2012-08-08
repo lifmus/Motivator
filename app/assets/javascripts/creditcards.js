@@ -1,9 +1,5 @@
 
  // this identifies your website in the createToken call below
-  $(document).ready(function(){
-  Stripe.setPublishableKey('pk_07T3vzpNsDZ1R1f6EXJUiQKC0u0qK');
-
-});
 
 
 
@@ -34,7 +30,7 @@ function stripeResponseHandler(status, response) {
 
         var form$ = $("#payment-form");
         // token contains id, last4, and card type
-        debugger;
+        // debugger;
         var token = response['id'];
         // insert the token into the form so it gets submitted to the server
         form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");

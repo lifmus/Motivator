@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: cf7054c43060dd56efb41beb9c104d6b84825b77
+  specs:
+    stripe (1.7.0)
+      multi_json (~> 1.1)
+      rest-client (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -151,6 +159,8 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
       rspec-expectations (~> 2.11.0)
@@ -228,5 +238,6 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   sqlite3
+  stripe!
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
