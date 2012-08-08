@@ -24,25 +24,29 @@ describe Goal do
   describe "progress methods" do
 
     before :each do
-      # Time.stub!(:now).and_return("2012-08-07 15:56:33 -0700")
-      @goal = Goal.create(:user_id => 1, :due_date => "September 4", :description => "Become a Black Belt")
+      @started_date = Time.now - 2.months
+      @due_date = Time.now + 2.months
+      @goal = Goal.create(:user_id => 1, :due_date => @due_date, :description => "Become a Black Belt")
       @goal.objectives.create(:description => "Go to Karate Class", :frequency => 3)
-
     end
 
     it "should be able to calculate current Goal progress as a percentage" do
       4.times do
         @goal.objectives.last.steps.create(:completed_at => Time.now)
       end
-      @goal.percentage_complete.should eq 33
+      @goal.percentage_complete.should eq 15
     end
 
     it "calculates the expected progress as a percentage based on the current date" do
-      goal_2 = Goal.create(:created_at => "2012-07-07 22:12:29", :description => "become a yellow belt", :due_date => "2012-09-04 00:00:00")
+      goal_2 = Goal.create(:created_at => @started_date, :user_id => 1, :description => "become a yellow belt", :due_date => @due_date)
       goal_2.objectives.create(:description => "Go to Karate Class", :frequency => 3)
+      22.times do
+        goal.objectives.last.steps.create(:completed_at => Time.now)
+      end
       goal_2.expected_percentage_complete.should eq 50
     end
 
   end
 
 end
+
