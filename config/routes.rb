@@ -1,5 +1,11 @@
 Motivator::Application.routes.draw do
 
+  get "pledges/new"
+
+  get "pledges/_form"
+
+  get "pledges/show"
+
   resources :creditcards
 
   get "objectives/_form"
