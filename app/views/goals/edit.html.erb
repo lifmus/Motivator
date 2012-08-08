@@ -5,16 +5,14 @@
 <h2>When did you last <%= @objective.description %>?</h2>
   <% @days.each_with_index do |day, index| %>
     <div>
-      <%= check_box_tag "day[#{index + 1}]", day, false %>
-      <%= day.strftime("%a %b #{day.day.ordinalize}") %>
+      <% if day > Time.now %>
+        <div style="color:grey"><%= day.strftime("%a %b #{day.day.ordinalize}") %></div>
+      <% else %>
+        <div style="color:green"><%= day.strftime("%a %b #{day.day.ordinalize}") %>
+          <%= check_box_tag "day[#{index + 1}]", day, false %></div>
+      <% end %>
     </div>
   <% end %>
   <%= hidden_field_tag :objective_id, @objective.id %>
   <%= submit_tag "Mark 'em done!", :class => "btn btn-primary" %>
-<% end %>
-
-<% @days.each do |day| %>
-  <div>
-    <%= day %>
-  </div>
 <% end %>

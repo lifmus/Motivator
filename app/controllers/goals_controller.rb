@@ -28,6 +28,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @objective = @goal.objectives.first #BUGBUG only works for one objective
     @days = []
+    # days_passed = end_of_month.advance(:days=>2).day - end_of_month.at_beginning_of_week.day + 1
     7.times { | num | @days << Time.now.at_beginning_of_week + num.days }
   end
 
@@ -35,15 +36,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @objective = Objective.find(params[:objective_id])
     params[:day].each do |key, value|
-
-      p value
-
       @objective.steps.find_or_create_by_completed_at(:completed_at => value)
-
-
-      # Step.find_or_create_by_completed_at(value)
-
-      # Step.find_or_create_by_completed_at(:completed_at => day, :objective_id => @objective.id)
     end
 
     redirect_to @goal

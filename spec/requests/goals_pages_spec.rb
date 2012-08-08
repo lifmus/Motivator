@@ -37,7 +37,7 @@ describe "Goals pages" do
 
         it "should redirect to the show page" do
           click_link_or_button "Mark 'em done!"
-          page.should have_content('the show page')
+          page.should have_content(goal.description)
         end
       end
 
