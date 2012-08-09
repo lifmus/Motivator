@@ -6,6 +6,34 @@ describe "Goals pages" do
   let(:user) { Fabricate(:user) }
   let(:goal) { Fabricate(:goal_with_objective) }
 
+
+  describe "goals#index" do
+
+    describe "when logged out" do
+      before { visit goals_path }
+      it { should have_content('Sign in') }
+    end # when logged out
+
+    describe "when logged in" do
+      before do
+        visit new_user_session_path
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Sign in"
+        user.goals.create(:description => "Have fun", :due_date => "August 18", :user_id => user.id)
+        visit goals_path
+      end
+
+      it {should have_content("Create a new goal")}
+      it {should have_content("Here are your existing goals")}
+      it "should list the goals" do
+        user.goals.each do |goal|
+          page.should have_content(goal.description)
+        end
+      end
+    end
+  end
+
   describe "goals#edit" do
 
     describe "when logged out" do
