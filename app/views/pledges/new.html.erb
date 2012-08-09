@@ -1,2 +1,9 @@
-<h1>Pledges#new</h1>
-<p>Find me in app/views/pledges/new.html.erb</p>
+<h1>Pledge</h1>
+<%= render 'form' %>
+
+Based on your due date and frequency, we suggest the following pledge amounts:
+<ul>
+<% [1,5,10].each_with_index do |x, index| %>
+  <li>For a $<%= x %> donation each time, pledge $<%= Pledge.suggested_amount(Goal.find(params[:goal_id]))[index]%></li>
+<% end %>
+</ul>
