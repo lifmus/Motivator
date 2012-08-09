@@ -45,5 +45,24 @@ describe Goal do
 
   end
 
+  describe "financial progress" do
+
+    before :each do
+      @started_date = Time.now.to_date - 2.months
+      @due_date = Time.now.to_date + 2.months
+      @goal = Goal.create(:user_id => 1, :due_date => @due_date, :description => "Become a Black Belt")
+      @goal.objectives.create(:description => "Go to Karate Class", :frequency => 3)
+      @goal.pledge.create(:amount => "450")
+      @goal.steps.create(:completed_at => @started_date + 1.week)
+      @goal.steps.create(:completed_at => @started_date + 2.weeks)
+      @goal.steps.create(:completed_at => @started_date + 3.weeks)
+    end
+
+    it "has a total pledge amount" do
+      @goal.pledge_amount.should eq 450
+    end
+
+  end
+
 end
 

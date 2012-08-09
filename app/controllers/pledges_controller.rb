@@ -25,6 +25,12 @@ class PledgesController < ApplicationController
       end
   end
 
-  def show
+  def edit
+    @pledge = Pledge.find(params[:id])
+    @goal = @pledge.goal
+  end
+
+  def update
+    # need to update
   end
 end
