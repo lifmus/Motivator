@@ -29,6 +29,10 @@ class CreditcardsController < ApplicationController
 
   def destroy
   end
+
+  def show
+
+  end
 end
 
 # test card: 4242424242424242
