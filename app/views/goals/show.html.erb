@@ -1,14 +1,16 @@
 <h1><%= @goal.description %></h1>
 
-Progress:
+Progress: <%= @goal.percentage_complete %>%
 <div class="progress progress-success progress-striped
      active">
   <div class="bar"
        style="width: <%= @goal.percentage_complete %>%;"></div>
 </div>
 
-Expected progress:
+Expected progress: <%= @goal.expected_percentage_complete %>%
 <div class="progress progress-info">
   <div class="bar"
        style="width: <%= @goal.expected_percentage_complete %>%;"></div>
 </div>
+
+<%= button_to "Add progress on this goal", edit_goal_path(@goal), :class=>"btn btn-primary btn-large goal_form", :method => "get" %>
