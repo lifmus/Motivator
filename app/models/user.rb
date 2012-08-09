@@ -34,12 +34,25 @@ class User < ActiveRecord::Base
     end
   end
 
-  def charge_card(amount, stripe_customer_id)
-    Stripe::Charge.create(
+  def charge_card(amount, stripe_customer_id, goal)
+    charge = Stripe::Charge.create(
     :amount => amount, # in cents
     :currency => "usd",
     :customer => stripe_customer_id
     )
+
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id)
+
+
+
+  end
+
+  def refund_money(amount, stripe_charge_id)
+    charge = Stripe::Charge.retrieve({CHARGE_ID})
+
+
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id)
+
   end
 
 

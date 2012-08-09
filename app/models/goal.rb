@@ -4,6 +4,7 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   has_many :objectives, :inverse_of => :goal
   has_many :steps, :through => :objectives
+  has_many :charges
   has_one :pledge
   accepts_nested_attributes_for :objectives
 

@@ -18,7 +18,8 @@ class CreditcardsController < ApplicationController
       )
       current_user.stripe_customer_id = customer.id
       current_user.save
-      redirect_to goal_path(@goal)
+      # redirect_to goal_path(@goal)
+      redirect_to creditcard_path(@goal)
   end
 
   def edit
