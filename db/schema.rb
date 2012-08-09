@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808230709) do
+ActiveRecord::Schema.define(:version => 20120809020752) do
+
+  create_table "charges", :force => true do |t|
+    t.integer  "goal_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "amount"
+  end
 
   create_table "goals", :force => true do |t|
     t.integer  "user_id"
@@ -31,9 +38,9 @@ ActiveRecord::Schema.define(:version => 20120808230709) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "goal_id"
-    t.decimal  "amount"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "amount"
   end
 
   create_table "sessions", :force => true do |t|

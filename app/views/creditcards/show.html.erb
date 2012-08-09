@@ -1,3 +1,7 @@
 <h1>Charge Confirmation Page</h1>
 
-<div> You will be charged <current_user.goals
+<div> Your goal is <%= @goal.description %></div>
+<div> Your pledge amount is $<%= @goal.pledge.amount %></div>
+Confirm?
+<%= button_to "YES", goal_charges_path(@goal) %>
+<%= button_to "Change Pledge Amount", edit_pledge_path(@goal.pledge), :method => "get" %>

@@ -5,6 +5,7 @@ class CreditcardsController < ApplicationController
   end
 
   def create
+      @goal = Goal.find(params[:goal_id])
       if current_user.name
         @name = current_user.name
       else
@@ -15,10 +16,9 @@ class CreditcardsController < ApplicationController
         :email => current_user.email,
         :description => @name
       )
-
       current_user.stripe_customer_id = customer.id
       current_user.save
-      redirect_to(root_path)
+      redirect_to goal_path(@goal)
   end
 
   def edit
@@ -31,6 +31,7 @@ class CreditcardsController < ApplicationController
   end
 
   def show
+    @goal = Goal.find(params[:id])
 
   end
 end

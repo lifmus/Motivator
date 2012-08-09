@@ -15,7 +15,11 @@ class PledgesController < ApplicationController
     @pledge = Pledge.new(params[:pledge])
     @pledge.goal = @goal
      if @pledge.save
-        redirect_to edit_goal_path(@pledge.goal_id), notice: 'Pledge was successfully created.'
+        if current_user.stripe_customer_id
+          redirect_to creditcard_path(@goal) , notice: 'Pledge was successfully created.'
+        else
+          redirect_to new_creditcard_path(:goal_id => @goal), notice: 'Pledge was successfully created.'
+        end
       else
         render action: "new"
       end

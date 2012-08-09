@@ -1,11 +1,22 @@
 Motivator::Application.routes.draw do
 
+  # get "charges/new"
+  #
+  #  get "charges/create"
+  #
+  #  get "charges/show"
+
+
   resources :creditcards
 
   resources :pledges
 
   resources :goals do
     resources :objectives
+  end
+
+  resources :goals do
+     resources :charges
   end
 
 
