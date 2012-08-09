@@ -11,21 +11,48 @@
     </div>
   <% end %>
 
+  <div class="row-fluid">
+    <div class="span 12">
+      <div class="field goal_form span4">
+        My goal is to
+      </div>
+      <div class="field goal_form span8">
+        <%= f.text_field :description, :placeholder=>"Become a world class Rubyist" %> <br /><br />
+      </div>
+    </div>
 
-  <div class="field goal_form">
-    My goal is to
-    <%= f.text_field :description, :class=>"input-xlarge", :placeholder=>"Become a world class Ruby programmer" %> <br /><br />
-    by <%= f.text_field :due_date, :class=>"input-xlarge", :placeholder=>"August 18, 2020"%> <br /><br />
-  </div>
+    <div class="span 12">
+      <div class="field goal_form span4">
+        by
+      </div>
+      <div class="field goal_form span8">
+        <%= f.text_field :due_date, :placeholder=>"August 18, 2020"%> <br /><br />
+      </div>
+    </div>
 
 
   <%= f.fields_for :objectives do |objective_fields| %>
-   <div class="field goal_form">
-     And to achieve this, I will
-      <%= objective_fields.text_field :description, :class=>"input-xlarge", :placeholder=>"Write 300 RSPEC tests"%> <br /><br />
-      at least
-      <%= objective_fields.text_field :frequency, :class=>"input-xlarge", :placeholder=>"5" %> <br /><br />times per week.
+  <div class="span 12">
+    <div class="field goal_form span4">
+      And to achieve this, I will
     </div>
+    <div class="field goal_form span8">
+      <%= objective_fields.text_field :description, :placeholder=>"Write 300 RSPEC tests"%> <br /><br />
+    </div>
+
+    <div class="span 12">
+      <div class="field goal_form span4">
+        at least
+      </div>
+      <div class="field goal_form span1">
+        <%= objective_fields.text_field :frequency, :placeholder=>"5" %>
+      </div>
+      <div class="field goal_form_2 span7">
+        times per week.<br /><br />
+      </div>
+    </div>
+  </div>
+
   <% end %>
   <br /><br />
 
@@ -35,3 +62,4 @@
 
 <% end %>
 
+</div>
