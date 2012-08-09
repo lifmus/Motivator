@@ -1,2 +1,24 @@
-<h1>Pledges#_form</h1>
-<p>Find me in app/views/pledges/_form.html.erb</p>
+<%= form_for @pledge do |f| %>
+  <% if @pledge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
+
+      <ul>
+      <% @pledge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+     <div class="field goal_form">
+       I pledge $
+        <%= f.text_field :amount, :class=>"input-xlarge", :placeholder=>"150"%> <br /><br />
+        to achieve my goal.
+      </div>
+      <br />
+    <div class="actions goal_form">
+       <%= f.submit "Submit my pledge", :class=>"btn btn-primary btn-large goal_form" %>
+     </div>
+
+  <% end %>
