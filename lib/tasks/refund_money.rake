@@ -6,3 +6,10 @@ task :refund_money => :environment do
     #reset refund amount?
   end
 end
+
+
+desc "Charge TJ"
+task :charge_TJ => :environment do
+  user = User.find_by_email('teej.murphy@gmail.com')
+  user.charge_card(50000, user, user.goals.first)
+end
