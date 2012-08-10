@@ -34,11 +34,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def charge_card(amount, stripe_customer_id, goal)
+  def charge_card(amount, user, goal)
     charge = Stripe::Charge.create(
     :amount => amount, # in cents
     :currency => "usd",
-    :customer => stripe_customer_id
+    :customer => user.stripe_customer_id
     )
 
     Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")

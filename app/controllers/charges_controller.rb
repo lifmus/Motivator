@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
 
   def create
     @goal = Goal.find(params[:goal_id])
-    if current_user.charge_card((@goal.pledge.amount*100), current_user.stripe_customer_id, @goal)
+    if current_user.charge_card((@goal.pledge.amount*100), current_user, @goal)
       # Charge.create(:amount => (@goal.pledge.amount*100), :goal_id => @goal.id)
     end
     redirect_to goal_path(@goal)
