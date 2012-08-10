@@ -17,7 +17,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(params[:goal])
     if @goal.save
-      redirect_to new_pledge_path(:goal_id => @goal), notice: 'Goal was successfully created.'
+      redirect_to new_goal_pledge_path(@goal), notice: 'Goal was successfully created.'
     else
       render action: "new"
     end

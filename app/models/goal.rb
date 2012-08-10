@@ -12,23 +12,44 @@ class Goal < ActiveRecord::Base
     (self.due_date.to_date - self.created_at.to_date).to_i
   end
 
+  def duration_in_weeks ## unrounded float
+    (self.due_date.to_date - self.created_at.to_date) / 7
+  end
+
+  def weekly_rate
+    self.objectives.first.frequency
+  end
+
+  def total_steps
+    (self.duration_in_weeks * self.weekly_rate).round
+  end
+
+  def elapsed_days
+    (Time.now.to_date - self.created_at.to_date).to_i
+  end
+
   def percentage_complete
-    daily_rate = self.objectives.first.frequency.to_f / 7
-    expected_steps = self.duration * daily_rate
-    ((self.objectives.first.steps.count.to_f / expected_steps) * 100 ).floor
+    ((self.objectives.first.steps.count.to_f / total_steps) * 100 ).floor
   end
 
   def expected_percentage_complete
-    elapsed_days = (Time.now.to_date - self.created_at.to_date).to_i
-    (elapsed_days.to_f / self.duration) * 100
+    (self.elapsed_days.to_f / self.duration) * 100
   end
 
   def pledge_amount
-    self.pledge.amount
+    if self.pledge
+      self.pledge.amount
+    else
+      0
+    end
+  end
+
+  def step_value
+    (self.pledge_amount.to_f / self.total_steps).round
   end
 
   def pledge_amount_earned_back
-    self.pledge_amount.to_f * (self.percentage_complete.to_f / 100)
+    self.step_value * self.objectives.first.steps.count
   end
 
 end

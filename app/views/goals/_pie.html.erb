@@ -4,7 +4,7 @@ var width = 200,
     height = 200,
     radius = Math.min(width, height) / 2,
     // data = d3.range(10).map(Math.random).sort(d3.descending),
-    data = [100 - <%= @goal.percentage_complete %> - <%= @goal.expected_percentage_complete %>, <%= @goal.percentage_complete %>, <%= @goal.expected_percentage_complete %> ].sort(d3.descending),
+    data = [<%= @goal.pledge_amount - @goal.pledge_amount_earned_back %>, <%= @goal.pledge_amount_earned_back %> ].sort(d3.ascending),
     color = d3.scale.category20(),
     arc = d3.svg.arc().outerRadius(radius),
     donut = d3.layout.pie();
@@ -49,4 +49,15 @@ function tweenDonut(b) {
     return arc(i(t));
   };
 }
+
+var center_group = vis.append("svg:g")
+  .attr("class", "center_group")
+  .attr("transform", "translate(" + (w/2) + "," + (h/2) + ")");
+
+
+var totalLabel = center_group.append("svg:text")
+  .attr("class", "label")
+  .attr("dy", -15)
+  .attr("text-anchor", "middle") // text-align: right
+  .text("TOTAL PLEDGE");
 </script>

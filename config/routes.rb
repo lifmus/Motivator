@@ -9,7 +9,9 @@ Motivator::Application.routes.draw do
 
   resources :creditcards
 
-  resources :pledges
+  resources :goals do
+    resources :pledges
+  end
 
   resources :goals do
     resources :objectives
