@@ -9,8 +9,4 @@ class Pledge < ActiveRecord::Base
     total_steps = weeks * goal.objectives.first.frequency
     [total_steps, (total_steps * 5), (total_steps * 10)]
   end
-
-  def goal
-    Goal.find(self.goal_id)
-  end
 end
