@@ -22,18 +22,8 @@ class CreditcardsController < ApplicationController
       redirect_to creditcard_path(@goal)
   end
 
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
   def show
     @goal = Goal.find(params[:id])
-
   end
 end
 

@@ -20,7 +20,8 @@ describe "Goals pages" do
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
         click_button "Sign in"
-        user.goals.create(:description => "Have fun", :due_date => "August 18", :user_id => user.id)
+        goal = user.goals.create(:description => "Have fun", :due_date => "August 18", :user_id => user.id)
+        goal.objectives.create(:description => "have more fun", :frequency => 3)
         visit goals_path
       end
 

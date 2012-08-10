@@ -2,16 +2,12 @@ class PledgesController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    if params[:goal_id].nil?
-      redirect_to new_goal_path, notice: 'Please create a goal.'
-    else
-      @goal = Goal.find(params[:goal_id])
-      @pledge = Pledge.new
-    end
+    @goal = current_user.goals.find(params[:goal_id])
+    @pledge = Pledge.new
   end
 
   def create
-    @goal = Goal.find(params[:goal_id])
+    @goal = current_user.goals.find(params[:goal_id])
     @pledge = Pledge.new(params[:pledge])
     @pledge.goal = @goal
      if @pledge.save
@@ -25,6 +21,12 @@ class PledgesController < ApplicationController
       end
   end
 
-  def show
+  def edit
+    @pledge = current_user.pledges.find(params[:id])
+    @goal = @pledge.goal
+  end
+
+  def update
+    # need to update
   end
 end

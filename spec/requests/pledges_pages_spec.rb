@@ -12,18 +12,6 @@ describe "Pledge pages" do
       it { should have_content('Sign in') }
     end # when logged out
 
-    describe "when logged in but no goal" do
-      before do
-        visit new_user_session_path
-        fill_in "Email", :with => user.email
-        fill_in "Password", :with => user.password
-        click_button "Sign in"
-        visit new_pledge_path
-      end
-
-      it { should have_content('Please create a goal') }
-    end
-
 
     describe "when logged in and yes goal" do
       before do
