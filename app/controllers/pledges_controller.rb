@@ -8,8 +8,7 @@ class PledgesController < ApplicationController
 
   def create
     @goal = current_user.goals.find(params[:goal_id])
-    @pledge = Pledge.new(params[:pledge])
-    @pledge.goal = @goal
+    @pledge = @goal.build_pledge(params[:pledge])
      if @pledge.save
         if current_user.stripe_customer_id
           redirect_to creditcard_path(@goal) , notice: 'Pledge was successfully created.'

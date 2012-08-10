@@ -23,4 +23,12 @@ class Goal < ActiveRecord::Base
     (elapsed_days.to_f / self.duration) * 100
   end
 
+  def pledge_amount
+    self.pledge.amount
+  end
+
+  def pledge_amount_earned_back
+    self.pledge_amount.to_f * (self.percentage_complete.to_f / 100)
+  end
+
 end
