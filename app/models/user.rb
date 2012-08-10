@@ -41,17 +41,18 @@ class User < ActiveRecord::Base
     :customer => stripe_customer_id
     )
 
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id)
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
 
 
 
   end
 
-  def refund_money(amount, stripe_charge_id)
-    charge = Stripe::Charge.retrieve({CHARGE_ID})
+  def refund_money(amount, stripe_charge_id, goal)
+    charge = Stripe::Charge.retrieve(stripe_charge_id)
+    charge.refund(:amount => amount)
 
 
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id)
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
 
   end
 
