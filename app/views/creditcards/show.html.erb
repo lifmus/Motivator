@@ -3,5 +3,5 @@
 <div> Your goal is <%= @goal.description %></div>
 <div> Your pledge amount is $<%= @goal.pledge.amount %></div>
 Confirm?
-<%= button_to "YES", goal_charges_path(@goal) %>
-<%= button_to "Change Pledge Amount", edit_pledge_path(@goal.pledge), :method => "get" %>
+<%= button_to "YES", goal_charges_path(@goal), :class => "btn btn-success btn-large"%>
+<%= button_to "Change Pledge Amount", edit_goal_pledge_path(@goal, @goal.pledge), :method => "get", :class => "btn btn-info btn-large"%>

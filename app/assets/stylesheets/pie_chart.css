@@ -1,3 +1,25 @@
 #progress-pie-chart {
-
+/*  background-color: #ffffff;
+  border: 1px solid gray;
+  font: 10px sans-serif;
+  height: 300px;
+  text-shadow: none;
+  width: 450px;*/
 }
+#progress-pie-chart .total{
+  font-size: 18px;
+  font-weight: bold;
+}
+#progress-pie-chart .units{
+  fill: gray;
+  font-size: 12px;
+}
+#progress-pie-chart .label{
+  fill: #CCC;
+  font-size: 12px;
+  font-weight: bold;
+}
+#progress-pie-chart .value{
+  font-size: 12px;
+  font-weight: bold;
+}​
