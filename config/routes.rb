@@ -13,6 +13,8 @@ Motivator::Application.routes.draw do
     resources :pledges
   end
 
+  resources :steps
+
   resources :goals do
     resources :objectives
   end

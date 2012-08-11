@@ -29,6 +29,8 @@ Expected progress: <%= @goal.expected_percentage_complete %>%
 
 </div>
 
+<%= button_to "Completed today", steps_path(:goal_id => @goal), :class =>"btn btn-primary btn-large", :method => "post" %>
+
 
 
 
