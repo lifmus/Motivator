@@ -41,45 +41,52 @@ class Goal < ActiveRecord::Base
   end
 
   def pledge_amount
-    if self.pledge
-      self.pledge.amount
-    else
-      0
-    end
+    # TODO remove this method; goal.pledge.amount is equivalent
+    # TODO add migration to set default value of amount to 0
+    # TODO change pledge.amount field from decimal to integer
+    self.pledge ? self.pledge.amount : 0
   end
 
   def step_value
-    (self.pledge_amount.to_f / self.total_steps)#.round  #TODO May need to put this back.
+    (self.pledge_amount.to_f / self.total_steps)#.round(2) # TODO May need to put this back.
   end
 
   def pledge_amount_earned_back
     self.step_value * self.objectives.first.steps.count
   end
 
-  # def refund_if_refundable
-  #   refund_amount = step_count_from_last_week * step_value
-  #   if refund_amount > 0
-  #     Charge.create(:)
-  #     refund_through_stripe
-  #   end
-  # end
-
   def initial_charge
     charges.initial_charge.first
   end
 
   def step_count_for_previous_period(num = 7)
-    steps.where("completed_at BETWEEN ? AND ?", Time.now - num.days, Time.now).count
+    steps.where("(completed_at BETWEEN ? AND ?)", Time.now - num.days, Time.now).count
+  end
+
+  def nonrefunded_step_count_for_previous_week(num = 7)
+    steps.where("(completed_at BETWEEN ? AND ?) AND refunded_at IS NULL", Time.now - num.days, Time.now).count
+  end
+
+  def nonrefunded_steps_for_previous_week(num = 7)
+    steps.where("(completed_at BETWEEN ? AND ?) AND refunded_at IS NULL", Time.now - num.days, Time.now)
   end
 
   def refund_amount_for_previous_week
-    step_count_for_previous_period * step_value
+    nonrefunded_step_count_for_previous_week * step_value
   end
 
   def weekly_goal_refund
-    user.refund_money((refund_amount_for_previous_week * 100).to_i, initial_charge.stripe_charge_id, self)
-    pledge.refunded_back += (refund_amount_for_previous_week * 100).to_i
-    pledge.save
+    if refund_amount_for_previous_week > 0
+      user.refund_money((refund_amount_for_previous_week * 100).to_i, initial_charge.stripe_charge_id, self)
+      nonrefunded_steps_for_previous_week.each do |step|
+        step.refunded_at = Time.now
+        step.save
+      end
+      pledge.refunded_back += (refund_amount_for_previous_week * 100).to_i
+      pledge.save
+    else
+      # TODO Send email to encourage them to do their steps.
+    end
   end
 
 end

@@ -1,12 +1,11 @@
 desc "Refund Money"
 task :refund_money => :environment do
-  users = Users.where("refund_amount > ?", 0)
-  users.each do |user|
-    user.refund_charge(params)
-    #reset refund amount?
+  if Time.now.monday?
+    puts "refunding weekly amounts for goals..."
+    User.refund_all_goals_for_previous_week
+    puts "...complete."
   end
 end
-
 
 desc "Charge David"
 task :charge_david => :environment do
