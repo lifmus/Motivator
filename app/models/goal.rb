@@ -8,6 +8,10 @@ class Goal < ActiveRecord::Base
   has_one :pledge
   accepts_nested_attributes_for :objectives
 
+  def readable_date
+    self.due_date.to_date.to_formatted_s(:long)
+  end
+
   def duration
     (self.due_date.to_date - self.created_at.to_date).to_i
   end

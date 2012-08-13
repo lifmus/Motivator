@@ -1,18 +1,19 @@
 <div id="progress-pie-chart"></div>
 <script type="text/javascript">
-var width = 300,
-    height = 300,
-    radius = Math.min(width, height) / 2,
+var w = 300,
+    h = 300,
+    radius = Math.min(w, h) / 2,
     // data = d3.range(10).map(Math.random).sort(d3.descending),
     data = [<%= @goal.pledge_amount - @goal.pledge_amount_earned_back %>, <%= @goal.pledge_amount_earned_back %> ].sort(d3.descending),
-    color = d3.scale.category10(),
+    color = d3.scale.linear()
+    .range(["#F7F7F7","#62C462"])
     arc = d3.svg.arc().outerRadius(radius),
     donut = d3.layout.pie();
 
-var vis = d3.select("#progress-pie-chart").append("svg")
+var vis = d3.select("#progress-pie-chart").append("svg:svg")
     .data([data])
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", w)
+    .attr("height", h);
 
 var arcs = vis.selectAll("g.arc")
     .data(donut)
@@ -22,6 +23,29 @@ var arcs = vis.selectAll("g.arc")
 
 var paths = arcs.append("path")
     .attr("fill", function(d, i) { return color(i); });
+
+var center_group = vis.append("svg:g")
+  .attr("class", "center_group")
+  .attr("transform", "translate(" + (w/2) + "," + (h/2) + ")");
+
+
+var totalLabel = center_group.append("svg:text")
+  .attr("class", "label")
+  .attr("dy", -15)
+  .attr("text-anchor", "middle") // text-align: right
+  .text("Amount Earned Back");
+
+
+  //TOTAL TRAFFIC VALUE
+var totalValue = center_group.append("svg:text")
+  .attr("class", "total")
+  .attr("dy", 7)
+  .attr("text-anchor", "middle") // text-align: right
+  .text("$<%= @goal.pledge_amount_earned_back.floor%>");
+
+
+
+
 
 paths.transition()
     .ease("bounce")
@@ -33,6 +57,14 @@ paths.transition()
     .delay(function(d, i) { return 2000 + i * 50; })
     .duration(750)
     .attrTween("d", tweenDonut);
+
+paths.transition()
+    .ease("elastic")
+    .delay(function(d, i) { return 2000 + i * 50; })
+    .duration(750)
+    .attrTween("d", tweenDonut);
+
+
 
 
 function tweenPie(b) {
@@ -52,24 +84,7 @@ function tweenDonut(b) {
 }
 
 
-var center_group = vis.append("svg:g")
-  .attr("class", "center_group")
-  .attr("transform", "translate(" + (w/2) + "," + (h/2) + ")");
 
-
-var totalLabel = center_group.append("svg:text")
-  .attr("class", "label")
-  .attr("dy", -15)
-  .attr("text-anchor", "middle") // text-align: right
-  .text("TOTAL PLEDGE");
-
-
-  //TOTAL TRAFFIC VALUE
-  var totalValue = center_group.append("svg:text")
-    .attr("class", "total")
-    .attr("dy", 7)
-    .attr("text-anchor", "middle") // text-align: right
-    .text("Waiting...");
 
 
 </script>

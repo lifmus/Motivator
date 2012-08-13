@@ -10,7 +10,7 @@ class StepsController < ApplicationController
     if @step.save
       redirect_to @goal
     else
-      redirect_to edit_goal_path(@goal)
+      redirect_to :back, alert: 'You already recorded that step today'
     end
   end
 

@@ -1,8 +1,12 @@
 class GoalsController < ApplicationController
-  before_filter :authenticate_user!#, :except => [ :show, :index]
+  before_filter :authenticate_user!, :except => [:index]
 
   def index
-    @goals = current_user.goals
+    if current_user
+      @goals = current_user.goals
+    else
+      redirect_to root_path
+    end
   end
 
   def show

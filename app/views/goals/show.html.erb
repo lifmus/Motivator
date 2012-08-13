@@ -1,4 +1,5 @@
 <h1><%= @goal.description %></h1>
+<h3>Goal Due Date: <%= @goal.readable_date %></h3><br />
 
 Progress: <%= @goal.percentage_complete %>%
 <div class="progress progress-success progress-striped
@@ -23,7 +24,7 @@ Expected progress: <%= @goal.expected_percentage_complete %>%
 <div class ="container span3">
   <div class="well span3">
     <ul>
-      <li>You have earned $<%= @goal.pledge_amount_earned_back%> of your original pledge of $<%= @goal.pledge_amount%>. </li>
+      <li>You have earned $<%= @goal.pledge_amount_earned_back.floor%> of your original pledge of $<%= @goal.pledge_amount%>. </li>
       <li>You have completed <%= @goal.objectives.first.steps.count %> out of <%= @goal.total_steps %> steps toward your goal. </li>
     </ul>
 
