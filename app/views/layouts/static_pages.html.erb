@@ -45,7 +45,7 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
+           <div class="span12">
 
 
                  <% if notice %>
@@ -60,16 +60,9 @@
 
             </div>
 
-            <% if signed_in? %>
 
-             <div class="span3">
-                <% if signed_in? %>
-                You are signed in as <%=current_user.email%> <br /><br />
-                <% end %>
-               <%= link_to "Create a new goal", new_goal_path if current_user%>
 
-            </div><!--/span-->
-            <% end %>
+
         </div><!--/row-->
       </div><!--/content-->
 
