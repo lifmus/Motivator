@@ -61,7 +61,7 @@ describe Goal do
     end
 
     it "has a step value" do
-      @goal.step_value.should eq 19
+      @goal.step_value.should eq 18.75 # 19
     end
 
   end
@@ -84,9 +84,26 @@ describe Goal do
     end
 
     it "calculates the pledge amount earned" do
-      @goal.pledge_amount_earned_back.should eq 57
+      @goal.pledge_amount_earned_back.should eq 56.25 # 57
     end
 
+  end
+
+  describe "#initial_charge" do
+    it "has an initial charge"
+  end
+
+  describe "#step_count_for_previous_period(num = 7)" do
+    it "counts the completed steps for a previous period"
+  end
+
+  describe "#refund_amount_for_previous_week" do
+    it "calculates the amount to be refunded for the previous week"
+  end
+
+  describe "#weekly_goal_refund" do
+    it "refunds the amount for the previous week to the user"
+    it "increments the pledge's refunded back amount"
   end
 
 end

@@ -37,16 +37,13 @@ class User < ActiveRecord::Base
 
   def charge_card(amount, user, goal)
     charge = Stripe::Charge.create(
-    :amount => amount, # in cents
-    :currency => "usd",
-    :customer => user.stripe_customer_id
+      :amount => amount, # in cents
+      :currency => "usd",
+      :customer => user.stripe_customer_id
     )
 
     # charges.create
     Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
-
-
-
   end
 
   def refund_money(amount, stripe_charge_id, goal)
@@ -56,9 +53,9 @@ class User < ActiveRecord::Base
     Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
   end
 
-  def refund_weekly
-    goals.each do
-      goal.refund_if_refundable
+  def self.refund_all_goals_for_previous_week
+    User.all.each do |user|
+      user.goals.each { |goal| goal.weekly_goal_refund }
     end
   end
 
