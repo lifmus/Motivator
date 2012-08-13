@@ -1,17 +1,17 @@
 <h1><%= @goal.description %></h1>
 <h3>Goal Due Date: <%= @goal.readable_date %></h3><br />
 
-Progress: <%= @goal.percentage_complete %>%
+Progress:
 <div class="progress progress-success progress-striped
      active">
   <div class="bar"
-       style="width: <%= @goal.percentage_complete %>%;"></div>
+       data-percentage="<%= @goal.percentage_complete %>"></div>
 </div>
 
-Expected progress: <%= @goal.expected_percentage_complete %>%
+Expected progress:
 <div class="progress progress-info">
   <div class="bar"
-       style="width: <%= @goal.expected_percentage_complete %>%;"></div>
+       data-percentage="<%= @goal.expected_percentage_complete %>"></div>
 </div>
 
 <div class="span12">
@@ -23,6 +23,7 @@ Expected progress: <%= @goal.expected_percentage_complete %>%
 
 <div class ="container span3">
   <div class="well span3">
+    <h4>Goal details:</h4><br />
     <ul>
       <li>You have earned $<%= @goal.pledge_amount_earned_back.floor %> of your original pledge of $<%= @goal.pledge_amount%>. </li>
       <li>You have completed <%= @goal.objectives.first.steps.count %> out of <%= @goal.total_steps %> steps toward your goal. </li>
@@ -40,6 +41,8 @@ Expected progress: <%= @goal.expected_percentage_complete %>%
 </div>
 
 </div>
+
+
 
 
 
