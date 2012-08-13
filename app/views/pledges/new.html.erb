@@ -1,9 +1,13 @@
-<h1>Pledge</h1>
 <%= render 'form' %>
-
-Based on your due date and frequency, we suggest the following pledge amounts:
+ <div class="pledge_form_2">
+Suggested pledges based on your time horizon:
+</div>
 <ul>
 <% [1,5,10].each_with_index do |x, index| %>
-  <li>For a $<%= x %> donation each time, pledge $<%= Pledge.suggested_amount(Goal.find(params[:goal_id]))[index]%></li>
+
+   <div class="pledge_form_2" style="padding: 10px;">
+  <li>For $<%= x %> per step, pledge $<%= Pledge.suggested_amount(Goal.find(params[:goal_id]))[index]%></li></div>
 <% end %>
+
+
 </ul>

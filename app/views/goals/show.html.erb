@@ -14,24 +14,36 @@ Expected progress: <%= @goal.expected_percentage_complete %>%
 </div>
 
 <div class="span12">
-<div class="span6">
+<div class="span4" style="padding-right: 40px;">
 <%= render :partial => 'pie' %>
 </div>
 <br />
 
 
-<div class="well sidebar-nav span3">
-  <ul>
-    <li>You have earned $<%= @goal.pledge_amount_earned_back%> of your original pledge of $<%= @goal.pledge_amount%>. </li>
-    <li>You have completed <%= @goal.objectives.first.steps.count %> out of <%= @goal.total_steps %> steps toward your goal. </li>
-  </ul>
+<div class ="container span3">
+  <div class="well span3">
+    <ul>
+      <li>You have earned $<%= @goal.pledge_amount_earned_back%> of your original pledge of $<%= @goal.pledge_amount%>. </li>
+      <li>You have completed <%= @goal.objectives.first.steps.count %> out of <%= @goal.total_steps %> steps toward your goal. </li>
+    </ul>
+
+    </div>
+
+    <div class="span3">
+    <%= button_to "I took a step today", steps_path(:goal_id => @goal), :class =>"btn btn-success btn-large goal_form", :method => "post" %>
   </div>
+
+    <div class="span3" style="font-size: 12px">
+      <%= link_to "Missed a day? Edit past days", edit_goal_path(@goal), :method => "get" %>
+    </div>
+</div>
 
 </div>
 
-<%= button_to "Completed today", steps_path(:goal_id => @goal), :class =>"btn btn-primary btn-large", :method => "post" %>
 
 
 
 
-<%= button_to "Add progress on this goal", edit_goal_path(@goal), :class=>"btn btn-primary btn-large goal_form", :method => "get" %>
+
+
+

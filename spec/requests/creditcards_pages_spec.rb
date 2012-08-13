@@ -33,23 +33,24 @@ describe "Credit Card pages" do
         it {should have_content("CVC")}
         it {should have_content("Expiration (MM/YYYY)")}
 
+        ## test below can't run without selenium/javascript testing framework
 
+        # it "should fill in the information" do
+        #   fill_in "card-number", with: "4242424242424242"
+        #   fill_in "card-cvc", with: "111"
+        #   fill_in "card-expiry-month", with: "10"
+        #   fill_in "card-expiry-year", with: "2015"
+        #
+        #   click_button "Submit Payment"
+        #   # sleep 10
+        #   user.stripe_customer_
+        #   p user
+        #   p user.stripe_customer_id
+        #   p "*********************"
+        #   click_button "YES"
+        #   Charge.last.amount.should eq 15000
 
-        it "should fill in the information" do
-          fill_in "card-number", with: 4242424242424242
-          fill_in "card-cvc", with: 111
-          fill_in "card-expiry-month", with: 10
-          fill_in "card-expiry-year", with: 2015
-
-          click_button "Submit Payment"
-          sleep 10
-          p user
-          p user.stripe_customer_id
-          p "*********************"
-          click_button "YES"
-          Charge.last.amount.should eq 15000
-
-        end
+        #end
 
     end
   end

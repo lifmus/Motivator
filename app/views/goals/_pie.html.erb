@@ -34,6 +34,7 @@ paths.transition()
     .duration(750)
     .attrTween("d", tweenDonut);
 
+
 function tweenPie(b) {
   b.innerRadius = 0;
   var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
@@ -49,6 +50,7 @@ function tweenDonut(b) {
     return arc(i(t));
   };
 }
+
 
 var center_group = vis.append("svg:g")
   .attr("class", "center_group")

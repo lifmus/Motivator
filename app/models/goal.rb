@@ -33,7 +33,7 @@ class Goal < ActiveRecord::Base
   end
 
   def expected_percentage_complete
-    (self.elapsed_days.to_f / self.duration) * 100
+    ((self.elapsed_days.to_f / self.duration) * 100).floor
   end
 
   def pledge_amount
