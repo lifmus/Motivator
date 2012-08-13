@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :goals
+  # has_many :charges, :through => :goals
   has_many :pledges, :through => :goals
 
 
@@ -41,6 +42,7 @@ class User < ActiveRecord::Base
     :customer => user.stripe_customer_id
     )
 
+    # charges.create
     Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
 
 
@@ -51,10 +53,13 @@ class User < ActiveRecord::Base
     charge = Stripe::Charge.retrieve(stripe_charge_id)
     charge.refund(:amount => amount)
 
-
     Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
-
   end
 
+  def refund_weekly
+    goals.each do
+      goal.refund_if_refundable
+    end
+  end
 
 end

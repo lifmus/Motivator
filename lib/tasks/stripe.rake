@@ -8,8 +8,8 @@ task :refund_money => :environment do
 end
 
 
-desc "Charge TJ"
-task :charge_TJ => :environment do
-  user = User.find_by_email('teej.murphy@gmail.com')
+desc "Charge David"
+task :charge_david => :environment do
+  user = User.find_by_email('david@example.com')
   user.charge_card(50000, user, user.goals.first)
 end
