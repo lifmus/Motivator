@@ -5,8 +5,6 @@ class Pledge < ActiveRecord::Base
   belongs_to :goal
 
   def self.suggested_amount(goal)
-    weeks = goal.duration / 7
-    total_steps = weeks * goal.objectives.first.frequency
-    [total_steps, (total_steps * 5), (total_steps * 10)]
+    [goal.total_steps, (goal.total_steps * 5), (goal.total_steps * 10)]
   end
 end
