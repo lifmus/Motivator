@@ -35,4 +35,8 @@ describe User do
       Charge.last.transaction_type.should eq "refund"
     end
   end
+
+  describe ".refund_all_goals_for_previous_week" do
+    it "refunds the amounts for all users and their goals"
+  end
 end
