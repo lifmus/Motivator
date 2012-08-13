@@ -1,8 +1,12 @@
 class GoalsController < ApplicationController
-  before_filter :authenticate_user!#, :except => [ :show, :index]
+  before_filter :authenticate_user!, :except => [:index]
 
   def index
-    @goals = current_user.goals
+    if current_user
+      @goals = current_user.goals
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -17,7 +21,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(params[:goal])
     if @goal.save
-      redirect_to new_pledge_path(:goal_id => @goal), notice: 'Goal was successfully created.'
+      redirect_to new_goal_pledge_path(@goal), notice: 'Goal was successfully created.'
     else
       render action: "new"
     end

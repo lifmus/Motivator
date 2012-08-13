@@ -1,15 +1,16 @@
 Motivator::Application.routes.draw do
 
-  # get "charges/new"
-  #
-  #  get "charges/create"
-  #
-  #  get "charges/show"
+  root :to => "static_pages#index"
 
+  get "static_pages/index"
 
   resources :creditcards
 
-  resources :pledges
+  resources :goals do
+    resources :pledges
+  end
+
+  resources :steps
 
   resources :goals do
     resources :objectives
@@ -22,7 +23,6 @@ Motivator::Application.routes.draw do
 
   # devise_for :users
 
-  root :to => "goals#index"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

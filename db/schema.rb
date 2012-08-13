@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809234312) do
+ActiveRecord::Schema.define(:version => 20120813195055) do
 
   create_table "charges", :force => true do |t|
     t.integer  "goal_id"
@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(:version => 20120809234312) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "goal_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "amount"
+    t.integer  "refunded_back", :default => 0
   end
 
   create_table "sessions", :force => true do |t|

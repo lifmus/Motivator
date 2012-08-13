@@ -8,7 +8,7 @@ describe "Pledge pages" do
   describe "pledge#new" do
 
     describe "when logged out" do
-      before { visit new_pledge_path }
+      before { visit new_goal_pledge_path(goal) }
       it { should have_content('Sign in') }
     end # when logged out
 

@@ -1,5 +1,5 @@
 
-<%= form_for @pledge do |f| %>
+<%= form_for [@goal, @pledge] do |f| %>
   <% if @pledge.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
@@ -12,14 +12,16 @@
     </div>
   <% end %>
 
-     <div class="field goal_form">
-       I pledge $
-        <%= f.text_field :amount, :class=>"input-xlarge", :placeholder=>"150"%> <br /><br />
-        to achieve my goal.
-      </div>
-      <br />
+
+     <div class="goal_form_2">
+         How much will you pledge to achieve your goal?
+       </div> <br />
+      <div class="pledge_form_2 field" style="padding-bottom: 30px;">
+        <span style="float: left; line-height: 40px;">$</span><span style="float: left;"><%= f.text_field :amount, :class=>"input", :placeholder=>"150", :size => 2%></span>
+      </div> <br /><br />
+
       <%= hidden_field_tag :goal_id, @goal.id %>
-    <div class="actions goal_form">
+    <div class="actions goal_form_2">
        <%= f.submit "Submit my pledge", :class=>"btn btn-primary btn-large goal_form" %>
      </div>
 

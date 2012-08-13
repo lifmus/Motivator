@@ -26,6 +26,14 @@ class PledgesController < ApplicationController
   end
 
   def update
-    # need to update
+    @goal = current_user.goals.find(params[:goal_id])
+    @pledge = @goal.pledge
+    if @pledge.update_attributes(params[:pledge])
+      flash[:notice] = "Pledge was successfully updated."
+      redirect_to creditcard_path(@goal)
+    else
+      render action: "edit"
+    end
+
   end
 end
