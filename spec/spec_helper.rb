@@ -10,6 +10,10 @@ require 'capybara/rspec'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+Capybara.run_server = true
+Capybara.server_port = 7000
+Capybara.app_host = "http://localhost:#{Capybara.server_port}"
+
 RSpec.configure do |config|
   # ## Mock Framework
   #

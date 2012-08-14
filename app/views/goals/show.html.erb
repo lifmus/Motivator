@@ -20,7 +20,7 @@ Expected progress:
 </div>
 <br />
 
-
+<% if @goal.user == current_user%>
 <div class ="container span3">
   <div class="well span3">
     <h4>Goal details:</h4><br />
@@ -39,6 +39,7 @@ Expected progress:
       <%= link_to "Missed a day? Edit past days", edit_goal_path(@goal), :method => "get" %>
     </div>
 </div>
+<% end%>
 
 </div>
 

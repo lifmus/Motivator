@@ -14,12 +14,18 @@ describe Goal do
   it { should have_many(:steps).through(:objectives) }
 
   it "throws an error if a goal doesn't have a user, description, or due date" do
-    expect { Goal.create }.should raise_error
+    # expect { Goal.create }.to raise_error
+    Goal.create().should_not be_valid
   end
 
-  it "throws an error if a goal is created with a due date in the past" do
-   Goal.create(:user_id => 1, :description => "new goal", :due_date => Time.now - 2.months).should raise_error
+  it "doesn't allow goals with a due date in the past" do
+   Goal.create(:user_id => 1, :description => "new goal", :due_date => Time.now - 2.months).should_not be_valid
   end
+
+  it "doesn't allow goals with a due date less than two weeks in the future" do
+   Goal.create(:user_id => 1, :description => "new goal", :due_date => (Time.now + 1.week)).should_not be_valid
+  end
+
 
   it "creates a goal with a user, description, and due date" do
     Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "go to the gym").should be_valid
