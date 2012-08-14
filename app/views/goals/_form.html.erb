@@ -54,6 +54,19 @@
   </div>
   <% end %>
   <br /><br />
+
+  <div class="span12">
+    <div class="field goal_form span4">
+      Goal privacy:
+    </div>
+
+   <div class="field span7">
+   <%= f.select(:public, [['Public', 'true'], ['Private', 'false']])%>
+   </div>
+
+</div>
+
+
     <div class="centerize">
     <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form" %>
     </div>
