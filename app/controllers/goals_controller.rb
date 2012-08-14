@@ -2,12 +2,8 @@ class GoalsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
 
   def index
-    if current_user
-      @goals = current_user.goals
-      @public_goals = Goal.find_all_by_public(true) - @goals
-    else
-      redirect_to root_path
-    end
+    @goals = signed_in? ? current_user.goals : []
+    @public_goals = Goal.find_all_by_public(true) - @goals
   end
 
   def show

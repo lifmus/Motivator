@@ -1,5 +1,6 @@
 <h1><%= @goal.description %></h1>
-<h3>Goal Due Date: <%= @goal.readable_date %></h3><br />
+<h3>Goal Due Date: <%= @goal.readable_date %></h3>
+<h3><%= @goal.objectives.first.description %></h3><br />
 
 Progress:
 <div class="progress progress-success progress-striped
