@@ -1,6 +1,6 @@
 desc "Refund Money"
 task :refund_money => :environment do
-  if Time.now.monday?
+  if Time.now.tuesday?
     puts "refunding weekly amounts for goals..."
     User.refund_all_goals_for_previous_week
     puts "...complete."
