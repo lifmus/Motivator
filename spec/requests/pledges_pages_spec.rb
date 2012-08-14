@@ -28,7 +28,7 @@ describe "Pledge pages" do
       end
 
       it { should have_content('pledge') }
-      it { should have_content('Based on your due date and frequency')}
+      it { should have_content('Suggested pledges based on your time horizon')}
 
       describe "filling in a pledge" do
         it "saves a pledge amount" do

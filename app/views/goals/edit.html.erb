@@ -1,5 +1,5 @@
 <h1>My goal is to <%= @goal.description %></h1>
-<h3>I will achieve this by <%= @goal.due_date.strftime("%a %b #{@goal.due_date.day.ordinalize}") %></h3>
+<h3>I will achieve this by <%= @goal.readable_date %></h3>
 <!-- TODO: TEST ME! -->
 <%= form_tag goal_path(@goal), :action => :update, :method => :put do %>
 <h2>When did you last <%= @objective.description %>?</h2>

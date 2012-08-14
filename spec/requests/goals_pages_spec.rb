@@ -11,7 +11,7 @@ describe "Goals pages" do
 
     describe "when logged out" do
       before { visit goals_path }
-      it { should have_content('Sign in') }
+      it { should have_content('Achieve Your Goals') }
     end # when logged out
 
     describe "when logged in" do
@@ -25,7 +25,7 @@ describe "Goals pages" do
         visit goals_path
       end
 
-      it {should have_content("Create a new goal")}
+      it {should have_content("Create a New Goal")}
       it {should have_content("Here are your existing goals")}
       it "should list the goals" do
         user.goals.each do |goal|
@@ -53,7 +53,7 @@ describe "Goals pages" do
 
       it { should have_content(goal.description) }
       it { should have_content('When did you') }
-      it { should have_content(goal.due_date.strftime("%a %b #{goal.due_date.day.ordinalize}")) }
+      it { should have_content("#{goal.readable_date}") }
 
       describe "mark things done" do
         before do

@@ -17,6 +17,10 @@ describe Goal do
     expect { Goal.create }.should raise_error
   end
 
+  it "throws an error if a goal is created with a due date in the past" do
+   Goal.create(:user_id => 1, :description => "new goal", :due_date => Time.now - 2.months).should raise_error
+  end
+
   it "creates a goal with a user, description, and due date" do
     Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "go to the gym").should be_valid
   end
