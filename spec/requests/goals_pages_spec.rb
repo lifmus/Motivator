@@ -65,6 +65,7 @@ describe "Goals pages" do
         end
 
         it "should redirect to the show page" do
+          save_and_open_page
           click_link_or_button "Mark 'em done!"
           page.should have_content(goal.description)
         end
