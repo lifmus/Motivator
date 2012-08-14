@@ -16,5 +16,5 @@
 /coverage
 
 # Ignore api keys
-
 /config/initializers/stripe.rb
+

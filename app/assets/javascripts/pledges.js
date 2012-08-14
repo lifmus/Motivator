@@ -26,5 +26,7 @@ setTimeout(function(){
 
 },300);
 
+$('#creditCardModal').modal(options)
+
 
 
