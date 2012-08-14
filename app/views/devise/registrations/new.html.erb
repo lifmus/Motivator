@@ -1,18 +1,14 @@
-<h2>Sign up</h2>
+<div class="span12">
+  <div class="row">
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <div class="span6">
+      <%= render "sign_up_form" %>
+    </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+    <div class="span6">
+      <%= render "devise/sessions/sign_in_form" %>
+    </div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  </div>
+</div>
+  <%= render "devise/shared/links" %>

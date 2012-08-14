@@ -13,7 +13,11 @@
   <br />
 
   <div>
-    <%= button_to "GET STARTED NOW!", new_user_registration_path, :method => "get", :class => "btn btn-large btn-primary"%>
+    <% if current_user %>
+      <%= button_to "GET STARTED NOW!", new_goal_path, :method => "get", :class => "btn btn-large btn-success"%>
+    <% else %>
+      <%= button_to "GET STARTED NOW!", new_user_registration_path, :method => "get", :class => "btn btn-large btn-success"%>
+    <% end %>
   </div>
 </div>
 

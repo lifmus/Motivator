@@ -34,7 +34,7 @@
   <%= f.fields_for :objectives do |objective_fields| %>
   <div class="span12">
     <div class="field goal_form span4">
-      And to achieve this, I will
+      I promise to
     </div>
     <div class="field goal_form span8">
       <%= objective_fields.text_field :description, :placeholder=>"train with my team"%> <br /><br />
@@ -66,9 +66,13 @@
 
 </div>
 
-
+<div>
+  &nbsp;
+</div>
     <div class="centerize">
-    <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form" %>
+
+ <%= f.submit "I'm ready to get motivated", :class=>"btn btn-success btn-large goal_form" %>
+
     </div>
 <% end %>
 
