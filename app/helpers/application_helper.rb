@@ -13,3 +13,5 @@ module ApplicationHelper
   end
 
 end
+
+# "http://graph.facebook.com/540988941/picture?type=square"

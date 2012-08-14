@@ -1,8 +1,7 @@
 Motivator::Application.routes.draw do
 
   root :to => "static_pages#index"
-
-  get "static_pages/index"
+  match "/index2" => "static_pages#index2"
 
   resources :creditcards
 
