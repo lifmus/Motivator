@@ -33,6 +33,7 @@
             <ul class="nav">
             <% if current_user %>
               <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete   %></li>
+              <li><%= link_to "Create a New Goal", new_goal_path%></li>
             <% else %>
               <li><%= link_to "Sign In", new_user_session_path %></li>
             <% end %>
@@ -66,7 +67,7 @@
                 <% if signed_in? %>
                 You are signed in as <%=current_user.email%> <br /><br />
                 <% end %>
-               <%= link_to "Create a new goal", new_goal_path if current_user%>
+
 
             </div><!--/span-->
             <% end %>

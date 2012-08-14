@@ -4,6 +4,7 @@ class GoalsController < ApplicationController
   def index
     if current_user
       @goals = current_user.goals
+      @public_goals = Goal.find_all_by_public(true) - @goals
     else
       redirect_to root_path
     end

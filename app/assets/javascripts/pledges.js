@@ -1,5 +1,4 @@
-$('btn').popover('hide')
-
+$("a[rel=popover]").popover();
 
 setTimeout(function(){
 
