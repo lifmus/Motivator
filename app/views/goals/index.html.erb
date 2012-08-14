@@ -1,17 +1,23 @@
 <div class="span12">
-<h1>Here are your existing goals:</h1>
+  <h1>Here are your existing goals:</h1> <br/>
 
-<br />
-<% @goals.each do |goal| %>
-<div class="well sidebar-nav span3">
-  <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
-  <div class="progress progress-success progress-striped
-       active">
-    <div class="bar"
-         data-percentage="<%= goal.percentage_complete %>"></div>
-  </div>
-</div>
-<% end %>
+  <% @goals.each do |goal| %>
+    <%= gravatar_for goal.user %>
+
+    <div class="well sidebar-nav row span4">
+
+      <div class="profile_picture span1"><img src="<%=goal.user.image %>" /></div>
+
+      <div class="span2">
+      <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
+
+      <div class="progress progress-success progress-striped active">
+        <div class="bar" data-percentage="<%= goal.percentage_complete %>"></div>
+      </div>
+      </div>
+
+    </div>
+  <% end %>
 </div>
 
 <br />
