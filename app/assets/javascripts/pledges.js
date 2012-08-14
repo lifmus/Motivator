@@ -1,3 +1,6 @@
+$('btn').popover('hide')
+
+
 setTimeout(function(){
 
     $('.progress .bar').each(function() {
@@ -23,3 +26,6 @@ setTimeout(function(){
     });
 
 },300);
+
+
+

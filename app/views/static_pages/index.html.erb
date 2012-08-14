@@ -3,8 +3,27 @@
 </div>
 
 
-<div id="myCarousel" class="carousel slide">
+
+<div class="span8 offset2" style="text-align:center; padding-bottom:30px">
+
+  <h2> How It Works: </h2>
+  <div style="font-size:18px; line-height:30px">
+    <i class="icon-off icon-large"></i> Sign up for an account<br />
+    <i class="icon-ok-circle icon-large"></i> Create a goal<br />
+    <i class="icon-thumbs-up icon-large"></i> Pledge an amount<br />
+    <i class="icon-facetime-video icon-large"></i> Record your progress<br />
+    <i class="icon-flag icon-large"></i> Stay Motivated!!!<br />
+  </div>
+
+  <div>
+    <%= button_to "GET STARTED NOW!", new_goal_path, :method => "get", :class => "btn btn-large btn-primary"%>
+  </div>
+</div>
+
+<div class="span12" style="text-align:center; padding-bottom:15px"> <h2>Preview:</h2> </div>
+<div id="myCarousel" class="carousel slide span8 offset2">
   <!-- Carousel items -->
+
   <div class="carousel-inner">
     <div class="active item"><img src="assets/new_goal_page.png" /></div>
     <div class="item"><img src="assets/pledge_page.png" /></div>
@@ -15,3 +34,8 @@
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
+
+
+
+
+
