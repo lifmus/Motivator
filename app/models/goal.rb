@@ -49,6 +49,10 @@ class Goal < ActiveRecord::Base
     self.pledge ? self.pledge.amount : 0
   end
 
+  def full_pledge_amount_refunded?
+    pledge.refunded_back >= pledge_amount
+  end
+
   def step_value
     (self.pledge_amount.to_f / self.total_steps)#.round(2) # TODO May need to put this back.
   end
@@ -74,11 +78,12 @@ class Goal < ActiveRecord::Base
   end
 
   def refund_amount_for_previous_week
-    nonrefunded_step_count_for_previous_week * step_value
+    # nonrefunded_step_count_for_previous_week * step_value
+    nonrefunded_steps_for_previous_week.count * step_value
   end
 
   def weekly_goal_refund
-    if refund_amount_for_previous_week > 0
+    if refund_amount_for_previous_week > 0 && !full_pledge_amount_refunded?
       user.refund_money((refund_amount_for_previous_week * 100).to_i, initial_charge.stripe_charge_id, self)
       nonrefunded_steps_for_previous_week.each do |step|
         step.refunded_at = Time.now

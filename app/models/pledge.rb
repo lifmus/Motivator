@@ -1,5 +1,5 @@
 class Pledge < ActiveRecord::Base
-  attr_accessible :amount, :goal_id
+  attr_accessible :amount, :goal_id, :refunded_back
   validates_presence_of :goal_id
   validates_presence_of :amount
   belongs_to :goal
