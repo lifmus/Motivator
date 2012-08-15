@@ -8,6 +8,9 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    if @goal.public == false
+      redirect_to goals_path, notice: 'That is a private goal'
+    end unless @goal.user == current_user
   end
 
   def new
