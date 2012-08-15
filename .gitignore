@@ -17,4 +17,4 @@
 
 # Ignore api keys
 /config/initializers/stripe.rb
-/config/initializers/twilio.rb
+#/config/initializers/twilio.rb
