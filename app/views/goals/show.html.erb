@@ -15,8 +15,8 @@ Expected progress:
 
   <div class="span6">
     <div class="row-fluid">
-      <div class="well">
       <% if @goal.user == current_user%>
+      <div class="well">
         <h4>Goal details:</h4><br />
         <ul>
           <li>You have earned $<%= @goal.pledge_amount_earned_back.floor %> of your original pledge of $<%= @goal.pledge_amount%>. </li>
