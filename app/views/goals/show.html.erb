@@ -33,15 +33,18 @@ Expected progress:
 </div>
 
 <div class="row-fluid" id="goals">
-  <h2 id="month">
+  <h3 id="month">
 	<%= link_to "<", date: @date.prev_month %>
-	<%= @date.strftime("%B %Y")%> 
+	<%= @date.strftime("%B %Y")%> Step History 
 	<%= link_to ">", date: @date.next_month %>
-  	</h2>
+  	</h3>
 	<%= calendar @date do |date| %>
 		<%= date.day %>
-		<% if @array.include? date %>
-			<ul>"Step Taken!"</ul>
+		<% if @steps_completed_at.include? date %>
+			<ul class="unstyled centerize">
+				<li><i class="icon-ok"></i><br /></li>
+				
+			</ul>
 		<% end %>
 	<% end %>
 </div>
