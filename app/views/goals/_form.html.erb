@@ -1,3 +1,6 @@
+
+
+
 <%= form_for @goal do |f| %>
   <% if @goal.errors.any? %>
     <div id="error_explanation">
@@ -45,8 +48,9 @@
         at least
       </div>
       <div class="field goal_form span1">
-        <%= objective_fields.text_field :frequency, :placeholder=>"6" %>
-      </div>
+       <%= objective_fields.select(:frequency, (1..7).map { |n| ["#{n}","#{n}"] })%>
+       </div>
+
       <div class="field goal_form_2 span7">
         times per week.<br /><br />
       </div>
@@ -68,8 +72,9 @@
 
 
     <div class="centerize">
-    <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form" %>
+    <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form"%>
     </div>
 <% end %>
 
 </div>
+

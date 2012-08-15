@@ -1,34 +1,45 @@
 require 'spec_helper'
 
 describe Goal do
-  before { @goal = Fabricate(:goal) }
-  subject { @goal }
 
-  it { should validate_presence_of(:description) }
-  it { should validate_presence_of(:due_date) }
-  it { should validate_presence_of(:user_id) }
-  it { should respond_to(:due_date) }
-  it { should respond_to(:description) }
-  it { should belong_to(:user) }
-  it { should have_many(:objectives)}
-  it { should have_many(:steps).through(:objectives) }
+  describe "goal field validations" do
+    before { @goal = Fabricate(:goal) }
+    subject { @goal }
 
-  it "throws an error if a goal doesn't have a user, description, or due date" do
-    # expect { Goal.create }.to raise_error
-    Goal.create().should_not be_valid
-  end
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:due_date) }
+    it { should validate_presence_of(:user_id) }
+    it { should respond_to(:due_date) }
+    it { should respond_to(:description) }
+    it { should belong_to(:user) }
+    it { should have_many(:objectives)}
+    it { should have_many(:steps).through(:objectives) }
 
-  it "doesn't allow goals with a due date in the past" do
-   Goal.create(:user_id => 1, :description => "new goal", :due_date => Time.now - 2.months).should_not be_valid
-  end
+    it "throws an error if a goal doesn't have a user, description, or due date" do
+      Goal.create().should_not be_valid
+    end
 
-  it "doesn't allow goals with a due date less than two weeks in the future" do
-   Goal.create(:user_id => 1, :description => "new goal", :due_date => (Time.now + 1.week)).should_not be_valid
-  end
+    it "doesn't allow goals with a due date in the past" do
+     Goal.create(:user_id => 1, :description => "new goal", :due_date => Time.now - 2.months).should_not be_valid
+    end
+
+    it "doesn't allow goals with a due date less than two weeks in the future" do
+     Goal.create(:user_id => 1, :description => "new goal", :due_date => (Time.now + 1.week)).should_not be_valid
+    end
+
+    it "doesn't allow goals with a due date more than one year in the future" do
+     Goal.create(:user_id => 1, :description => "new goal", :due_date => (Time.now + 2.years)).should_not be_valid
+    end
 
 
-  it "creates a goal with a user, description, and due date" do
-    Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "go to the gym").should be_valid
+    it "creates a goal with a user, description, and due date" do
+      Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "go to the gym").should be_valid
+    end
+
+    it "cannot take more than 140 characters for the goal" do
+      Goal.create(:user_id => 1, :due_date => Time.now + 6.months, :description => "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ).should_not be_valid
+    end
+
   end
 
   describe "progress methods" do

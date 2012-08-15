@@ -7,6 +7,8 @@ class Goal < ActiveRecord::Base
   has_many :charges
   has_one :pledge
   accepts_nested_attributes_for :objectives
+  validates_datetime :due_date, :on_or_after => :two_weeks_ahead, :on_or_before => :one_year_ahead
+  validates_length_of :description, :maximum => 140
 
   def readable_date
     self.due_date.to_date.to_formatted_s(:long)

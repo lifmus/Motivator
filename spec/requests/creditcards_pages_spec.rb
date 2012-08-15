@@ -20,7 +20,7 @@ describe "Credit Card pages" do
         click_button "Sign in"
         visit new_goal_path
         fill_in "goal_description", with: "become a dinosaur"
-        fill_in "goal_due_date", with: "August 30, 2023"
+        fill_in "goal_due_date", with: Time.now + 3.weeks
         fill_in "goal_objectives_attributes_0_description", with: "eat magical eggs"
         fill_in "goal_objectives_attributes_0_frequency", with: 3
         click_button "I'm ready to get motivated"

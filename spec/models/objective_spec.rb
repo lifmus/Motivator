@@ -20,4 +20,8 @@ describe Objective do
     Objective.create(:goal_id => 1, :frequency => 3, :description => "is a great word").should be_valid
   end
 
+  it "cannot take more than 140 characters for the objective" do
+    Objective.create(:goal_id => 1, :frequency => 3, :description => "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ).should_not be_valid
+  end
+
 end
