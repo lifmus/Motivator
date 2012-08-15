@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
         @client.account.sms.messages.create(
           :from => '+14158684100',
           :to => self.phone_number,
-          :body => "You still have to #{goal.objectives.first.description} #{goal.objectives.first.frequency - goal.step_count_for_previous_period} more time(s) this week"
+          :body => "Did you #{goal.objectives.first.description} recently?"
         )
       end
     end
