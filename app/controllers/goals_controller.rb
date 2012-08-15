@@ -8,6 +8,11 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    @array = []
+    @steps_by_date = @goal.steps.each do |step|
+      @array << step.completed_at.to_date
+    end
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     if @goal.public == false
       redirect_to goals_path, notice: 'That is a private goal'
     end unless @goal.user == current_user
