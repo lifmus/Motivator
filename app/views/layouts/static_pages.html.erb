@@ -18,17 +18,17 @@
   </head>
   <body>
 
-    <%= render "layouts/navbar" %>
+    <%= render "shared/navbar" %>
 
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span12">
-              <%= yield %>
-            </div>
+          <div class="span12">
+            <%= render "shared/alerts" %>
+            <%= yield %>
+          </div>
         </div><!--/row-->
       </div><!--/content-->
-
 
       <footer>
         <p>&copy; GSD 2012</p>
