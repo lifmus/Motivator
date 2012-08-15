@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name, :image
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name, :image, :phone_number
   # attr_accessible :title, :body
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -25,6 +25,19 @@ class User < ActiveRecord::Base
                           image: auth.info.image)
     end
     user
+  end
+
+  def send_text_reminder
+    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    self.goals.each do |goal|
+      if goal.step_count_for_previous_period < goal.objectives.first.frequency
+        @client.account.sms.messages.create(
+          :from => '+14158684100',
+          :to => self.phone_number,
+          :body => "You still have to #{goal.objectives.first.description} #{goal.objectives.first.frequency - goal.step_count_for_previous_period} more time(s) this week"
+        )
+      end
+    end
   end
 
   def self.new_with_session(params, session)
