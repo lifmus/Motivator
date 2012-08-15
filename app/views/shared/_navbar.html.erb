@@ -1,21 +1,19 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <!-- <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </a> -->
+      </a>
 
       <a class="brand" href="<%=goals_path%>"><b>Motivator</b></a>
 
-      <ul class="nav pull-right">
+      <ul class="nav pull-right nav-collapse">
       <% if signed_in? %>
         <li><%= link_to "Community Goals", goals_path%></li>
         <li><%= link_to "Create a New Goal", new_goal_path%></li>
         <li><%= link_to "Signed in as #{current_user.email}", edit_user_registration_path %></li>
-
-
         <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete   %></li>
       <% else %>
         <li><%= link_to "Sign Up", new_user_registration_path %>
