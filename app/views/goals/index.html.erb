@@ -1,25 +1,23 @@
 <% if signed_in? %>
-<div class="span12">
-  <h1>Here are your existing goals:</h1> <br/>
+  <div class="span12">
+    <h1>Here are your existing goals:</h1> <br/>
 
-  <% @goals.each do |goal| %>
-    <!-- <%= gravatar_for goal.user %> -->
+    <% @goals.each do |goal| %>
 
-    <div class="well sidebar-nav row span4">
+      <div class="well sidebar-nav row span4">
 
-      <div class="profile_picture span1"><%= profile_pic_for goal.user %></div>
+        <div class="profile_picture span1"><%= profile_pic_for goal.user %></div>
 
-      <div class="span2">
-        <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
+        <div class="span2">
+          <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
 
-        <div class="progress progress-success progress-striped active">
-          <div class="bar" data-percentage="<%= goal.percentage_complete %>"></div>
+          <%= render :partial => "progress", :locals => { :goal => goal } %>
+
         </div>
-      </div>
 
-    </div>
-  <% end %>
-</div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <br />
