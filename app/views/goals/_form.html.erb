@@ -14,63 +14,82 @@
     </div>
   <% end %>
 
+  <!-- GOAL DESCRIPTION -->
   <div class="row-fluid">
-    <div class="span12">
-      <div class="field goal_form span4">
-        My goal is to
-      </div>
-      <div class="field goal_form span8">
-        <%= f.text_field :description, :placeholder=>"Complete an Iron Man" %> <br /><br />
-      </div>
+    <div class="span6 field goal_form">
+      My goal is to
     </div>
 
-    <div class="span12">
-      <div class="field goal_form span4">
-        by
-      </div>
-      <div class="field goal_form span8">
-        <%= f.text_field :due_date, :placeholder=>"October 18, 2012"%> <br /><br />
-      </div>
+    <div class="span6 field goal_form">
+      <%= f.text_field :description, :placeholder=>"Complete an Iron Man" %>
+    </div>
+  </div>
+
+  <!-- GOAL DUE DATE -->
+  <div class="row-fluid">
+    <div class="span6 field goal_form">
+      by
     </div>
 
+    <div class="span6 field goal_form">
+      <%= f.text_field :due_date, :placeholder=>"October 18, 2012"%>
+    </div>
+  </div>
 
   <%= f.fields_for :objectives do |objective_fields| %>
-  <div class="span12">
-    <div class="field goal_form span4">
-      And to achieve this, I will
-    </div>
-    <div class="field goal_form span8">
-      <%= objective_fields.text_field :description, :placeholder=>"train with my team"%> <br /><br />
+
+    <!-- OBJECTIVE DESCRIPTION -->
+    <div class="row-fluid">
+      <div class="span6 field goal_form">
+        To achieve this, I will
+      </div>
+
+      <div class="span6 field goal_form">
+        <%= objective_fields.text_field :description, :placeholder=>"train with my team"%>
+      </div>
     </div>
 
-    <div class="span12">
-      <div class="field goal_form span4">
+    <!-- OBJECTIVE FREQUENCY -->
+    <div class="row-fluid">
+      <div class="span6 field goal_form">
         at least
       </div>
-      <div class="field goal_form span1">
-       <%= objective_fields.select(:frequency, (1..7).map { |n| ["#{n}","#{n}"] })%>
-       </div>
 
-      <div class="field goal_form_2 span7">
+
+      <div class="span1 field goal_form">
+         <%= objective_fields.select(:frequency, (1..7).map { |n| ["#{n}","#{n}"] })%>
+      </div>
+
+      <div class="span5 field goal_form_2">
         times per week.<br /><br />
       </div>
     </div>
+
   </div>
   <% end %>
-  <br /><br />
 
-  <div class="span12">
-    <div class="field goal_form span4">
-      Goal privacy:
+  <!-- GOAL PRIVACY -->
+  <div class="row-fluid">
+    <div class="span6 field goal_form">
+      This is a
     </div>
 
-   <div class="field span7">
-   <%= f.select(:public, [['Public', 'true'], ['Private', 'false']])%>
-   </div>
+    <div class="span3 field goal_form">
+      <%= f.select(:public, [['Public', 'true'], ['Private', 'false']])%>
+    </div>
+
+    <div class="span3 field goal_form_2">
+      goal.<br /><br />
+    </div>
+  </div>
 
 </div>
 
+<div class="row-fluid centerize">
+  <%= f.submit "I'm ready to get motivated", :class=>"btn btn-success btn-large goal_form" %>
+</div>
 
+<<<<<<< HEAD
     <div class="centerize">
     <%= f.submit "I'm ready to get motivated", :class=>"btn btn-primary btn-large goal_form"%>
     </div>
@@ -78,3 +97,7 @@
 
 </div>
 
+=======
+<% end %>
+</div>
+>>>>>>> bbd5fce661d362f863010b11457aec9c7a7f3daf

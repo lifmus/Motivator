@@ -1,8 +1,29 @@
-<div class="hero-unit" style="text-align:center;">
-    <h1>Achieve Your Goals</h1>
+<div class="span12" style="text-align:center; padding-bottom:30px">
+  <h2> How It Works: </h2><br />
+  <div style="font-size:20px; line-height:30px">
+    <h1>Want more motivation in attaining your goals?</h1>
+    <i class="icon-fire icon-large"></i>
+    <h1>Give us your money.</h1>
+    <i class=" icon-user icon-large"></i>
+    <h1>Earn it back when you make progress.</h1>
+    <i class=" icon-thumbs-up icon-large"></i>
+  </div>
+
+  <br />
+
+  <div>
+    <% if current_user %>
+      <%= button_to "GET STARTED NOW!", new_goal_path, :method => "get", :class => "btn btn-large btn-success"%>
+    <% else %>
+      <%= button_to "GET STARTED NOW!", new_user_registration_path, :method => "get", :class => "btn btn-large btn-success"%>
+    <% end %>
+  </div>
 </div>
 
 
+<!-- <div class="hero-unit" style="text-align:center;">
+    <h1>Achieve Your Goals</h1>
+</div>
 
 <div class="span8 offset2" style="text-align:center; padding-bottom:30px">
 
@@ -18,22 +39,52 @@
   <div>
     <%= button_to "GET STARTED NOW!", new_goal_path, :method => "get", :class => "btn btn-large btn-primary"%>
   </div>
-</div>
+</div> -->
 
-<div class="span12" style="text-align:center; padding-bottom:15px"> <h2>Preview:</h2> </div>
-<div id="myCarousel" class="carousel slide span8 offset2">
+ <!-- <h2>Preview:</h2>  -->
+<!-- <div class="span12" style="text-align:center; padding-bottom:15px"></div>
+<div id="myCarousel" class="carousel slide span8 offset2"> -->
   <!-- Carousel items -->
 
-  <div class="carousel-inner">
-    <div class="active item"><img src="assets/new_goal_page.png" /></div>
-    <div class="item"><img src="assets/pledge_page.png" /></div>
-    <div class="item"><img src="assets/goal_summary_page.png" /></div>
- <div class="item"><img src="assets/goal_index_page.png" /></div>
-  </div>
+  <!-- <div class="carousel-inner">
+
+    <div class="active item">
+      <img src="assets/new_goal_page.png" />
+      <div class="carousel-caption">
+        <h4>Create a goal!</h4>
+        <p>Here is a caption!</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="assets/pledge_page.png" />
+      <div class="carousel-caption">
+        <h4>Bet on yourself!</h4>
+        <p>Here is a caption!</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="assets/goal_summary_page.png" />
+      <div class="carousel-caption">
+        <h4>Check your stats!</h4>
+        <p>Here is a caption!</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="assets/goal_index_page.png" />
+      <div class="carousel-caption">
+        <h4>Follow others!</h4>
+        <p>Here is a caption!</p>
+      </div>
+    </div>
+  </div> -->
+
   <!-- Carousel nav -->
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <!-- <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
+</div> -->
 
 
 
