@@ -1,6 +1,3 @@
-
-
-
 <%= form_for @goal do |f| %>
   <% if @goal.errors.any? %>
     <div id="error_explanation">
@@ -56,16 +53,15 @@
       </div>
 
 
-      <div class="span1 field goal_form">
+      <div class="span3 field goal_form">
          <%= objective_fields.select(:frequency, (1..7).map { |n| ["#{n}","#{n}"] })%>
       </div>
 
-      <div class="span5 field goal_form_2">
+      <div class="span3 field goal_form_2">
         times per week.<br /><br />
       </div>
     </div>
 
-  </div>
   <% end %>
 
   <!-- GOAL PRIVACY -->
