@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def send_text_reminder
-    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    @client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
     self.goals.each do |goal|
       if goal.step_count_for_previous_period < goal.objectives.first.frequency
         @client.account.sms.messages.create(
