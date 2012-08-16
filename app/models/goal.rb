@@ -63,11 +63,11 @@ class Goal < ActiveRecord::Base
   end
 
   def pledge_amount_earned_back
-    earned = self.step_value * self.objectives.first.steps.count 
-      if earned > self.pledge_amount
+    @earned = self.step_value * self.objectives.first.steps.count 
+      if @earned > self.pledge_amount
         self.pledge_amount
       else
-        earned
+        @earned
       end    
   end
 

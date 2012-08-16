@@ -121,6 +121,15 @@ describe Goal do
       goal.readable_date.should eq goal.due_date.to_date.to_formatted_s(:long)
     end
   end
+  
+  
+  describe "#finished_date" do
+    
+    it "returns the date that the final step was completed" do
+      @goal.finished_date.should be nil 
+    end
+  
+  end
 
   describe "#step_count_for_previous_period(num = 7)" do
     it "counts the completed steps for a previous period"
@@ -134,6 +143,7 @@ describe Goal do
     it "refunds the amount for the previous week to the user"
     it "increments the pledge's refunded back amount"
   end
+
 
 end
 
