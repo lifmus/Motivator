@@ -2,7 +2,7 @@ class Goal < ActiveRecord::Base
   attr_accessible :description, :due_date, :user_id, :objectives_attributes, :created_at, :public
   validates_presence_of :user_id, :description, :due_date
   belongs_to :user
-  has_many :objectives, :inverse_of => :goal
+  has_many :objectives, :inverse_of => :goal, :dependent => :destroy
   has_many :steps, :through => :objectives
   has_many :charges
   has_one :pledge
