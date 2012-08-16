@@ -20,6 +20,7 @@ class Charge < ActiveRecord::Base
     end
 
     self.stripe_charge_id = charge.id
+    self.save
   end
 
 end
