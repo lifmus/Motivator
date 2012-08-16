@@ -8,3 +8,7 @@ end
 Fabricator(:goal_with_objective, :from => :goal) do
   objectives(:count => 1) { Fabricate(:objective) }
 end
+
+Fabricator(:goal_with_pledge_and_objective, :from => :goal_with_objective) do
+  pledge { Fabricate(:pledge) }
+end

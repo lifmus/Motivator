@@ -1,25 +1,15 @@
 class CreditcardsController < ApplicationController
-   before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
   def new
   end
 
   def create
-      @goal = Goal.find(params[:goal_id])
-      if current_user.name
-        @name = current_user.name
-      else
-        @name = "not given"
-      end
-        customer = Stripe::Customer.create(
-        :card => params[:stripeToken],
-        :email => current_user.email,
-        :description => @name
-      )
-      current_user.stripe_customer_id = customer.id
-      current_user.save
-      # redirect_to goal_path(@goal)
-      redirect_to creditcard_path(@goal)
+    @goal = Goal.find(params[:goal_id])
+
+    current_user.create_stripe_customer_id(params[:stripeToken])
+
+    redirect_to creditcard_path(@goal)
   end
 
   def show

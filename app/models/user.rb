@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :goals
   # has_many :charges, :through => :goals
   has_many :pledges, :through => :goals
-  validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  # validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  validates :phone_number, :format => /\d\d\d\d\d\d\d\d\d\d/,
+                           :allow_blank => true
 
 
   # Setup accessible (or protected) attributes for your model
@@ -49,6 +51,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_stripe_customer_id(stripeToken)
+    description = self.name ? self.name : "not given"
+    customer = Stripe::Customer.create(
+      :card => stripeToken,
+      :email => email,
+      :description => description
+    )
+    self.stripe_customer_id = customer.id
+    self.save
+  end
+
   def charge_card(amount, user, goal)
     charge = Stripe::Charge.create(
       :amount => amount, # in cents
@@ -72,7 +85,5 @@ class User < ActiveRecord::Base
       user.goals.each { |goal| goal.weekly_goal_refund }
     end
   end
-
-
 
 end
