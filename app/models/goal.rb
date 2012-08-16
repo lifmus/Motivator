@@ -103,13 +103,14 @@ class Goal < ActiveRecord::Base
   end
 
   def weekly_goal_refund
-    if refund_amount_for_previous_week > 0 && !full_pledge_amount_refunded?
+    amount_to_be_refunded = refund_amount_for_previous_week
+    if amount_to_be_refunded > 0 && !full_pledge_amount_refunded?
       user.refund_money((refund_amount_for_previous_week * 100).to_i, initial_charge.stripe_charge_id, self)
       nonrefunded_steps_for_previous_week.each do |step|
         step.refunded_at = Time.now
         step.save
       end
-      pledge.refunded_back += (refund_amount_for_previous_week * 100).to_i
+      pledge.refunded_back += (amount_to_be_refunded * 100).to_i
       pledge.save
     else
       # TODO Send email to encourage them to do their steps.

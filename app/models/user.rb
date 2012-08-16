@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def send_text_reminder
-    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    @client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
     self.goals.each do |goal|
       if goal.step_count_for_previous_period < goal.objectives.first.frequency
         @client.account.sms.messages.create(
@@ -63,21 +63,25 @@ class User < ActiveRecord::Base
   end
 
   def charge_card(amount, user, goal)
-    charge = Stripe::Charge.create(
-      :amount => amount, # in cents
-      :currency => "usd",
-      :customer => user.stripe_customer_id
-    )
+    # charge = Stripe::Charge.create(
+    #   :amount => amount, # in cents
+    #   :currency => "usd",
+    #   :customer => user.stripe_customer_id
+    # )
 
     # charges.create
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
+    # Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
+    Charge.create :amount => amount,
+                  :goal_id => goal.id,
+                  # :stripe_charge_id => charge.id,
+                  :transaction_type => "initial charge"
   end
 
   def refund_money(amount, stripe_charge_id, goal)
-    charge = Stripe::Charge.retrieve(stripe_charge_id)
-    charge.refund(:amount => amount)
+    # charge = Stripe::Charge.retrieve(stripe_charge_id)
+    # charge.refund(:amount => amount)
 
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => stripe_charge_id, :transaction_type => "refund")
   end
 
   def self.refund_all_goals_for_previous_week
