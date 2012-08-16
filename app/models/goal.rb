@@ -10,6 +10,16 @@ class Goal < ActiveRecord::Base
   validates_datetime :due_date, :on_or_after => :two_weeks_ahead, :on_or_before => :one_year_ahead
   validates_length_of :description, :maximum => 140
 
+  def last_step
+    self.steps[self.total_steps - 1]
+  end
+  
+  def finished_date
+    if self.steps.count >= self.total_steps
+      self.last_step.completed_at
+    end
+  end
+  
   def readable_date
     self.due_date.to_date.to_formatted_s(:long)
   end
