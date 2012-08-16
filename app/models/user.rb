@@ -49,6 +49,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_stripe_customer_id(stripeToken)
+    description = self.name ? self.name : "not given"
+    customer = Stripe::Customer.create(
+      :card => stripeToken,
+      :email => email,
+      :description => description
+    )
+    self.stripe_customer_id = customer.id
+    self.save
+  end
+
   def charge_card(amount, user, goal)
     charge = Stripe::Charge.create(
       :amount => amount, # in cents
@@ -72,7 +83,5 @@ class User < ActiveRecord::Base
       user.goals.each { |goal| goal.weekly_goal_refund }
     end
   end
-
-
 
 end

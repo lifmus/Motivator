@@ -22,35 +22,34 @@ describe "Credit Card pages" do
         fill_in "goal_description", with: "become a dinosaur"
         fill_in "goal_due_date", with: Time.now + 3.weeks
         fill_in "goal_objectives_attributes_0_description", with: "eat magical eggs"
-        fill_in "goal_objectives_attributes_0_frequency", with: 3
+        # fill_in "goal_objectives_attributes_0_frequency", with: 3
+        select("3", :from => "goal_objectives_attributes_0_frequency")
         click_button "I'm ready to get motivated"
         fill_in "pledge_amount", with: 150
         click_button "Submit my pledge"
 
       end
 
-        it {should have_content("Card Number")}
-        it {should have_content("CVC")}
-        it {should have_content("Expiration (MM/YYYY)")}
+      it {should have_content("Card Number")}
+      it {should have_content("CVC")}
+      it {should have_content("Expiration (MM/YYYY)")}
 
-        ## test below can't run without selenium/javascript testing framework
+      describe "save a valid credit card" do
+        before :each do
+          fill_in "card-number", with: "4242424242424242"
+          fill_in "card-cvc", with: "111"
+          fill_in "card-expiry-month", with: "10"
+          fill_in "card-expiry-year", with: Time.now + 2.years
+        end
 
-        # it "should fill in the information" do
-        #   fill_in "card-number", with: "4242424242424242"
-        #   fill_in "card-cvc", with: "111"
-        #   fill_in "card-expiry-month", with: "10"
-        #   fill_in "card-expiry-year", with: "2015"
-        #
-        #   click_button "Submit Payment"
-        #   # sleep 10
-        #   user.stripe_customer_
-        #   p user
-        #   p user.stripe_customer_id
-        #   p "*********************"
-        #   click_button "YES"
-        #   Charge.last.amount.should eq 15000
+        it "creates the stripe_customer_id" do
+          mock_customer = mock()
+          mock_customer.stub(:id).and_return("test")
+          Stripe::Customer.stub(:create).and_return(mock_customer)
 
-        #end
+          expect { click_link_or_button "Save Credit Card" }.to change{user.reload.stripe_customer_id}.from(nil).to("test")
+        end
+      end
 
     end
   end

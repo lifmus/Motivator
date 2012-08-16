@@ -4,14 +4,14 @@ require 'spec_helper'
 describe "Goals pages" do
   subject { page }
   let(:user) { Fabricate(:user) }
-  let(:goal) { Fabricate(:goal_with_objective) }
+  let(:goal) { Fabricate(:goal_with_pledge_and_objective) }
 
 
   describe "goals#index" do
 
     describe "when logged out" do
       before { visit goals_path }
-      it { should have_content('Achieve Your Goals') }
+      it { should have_content('public goals') }
     end # when logged out
 
     describe "when logged in" do
@@ -65,32 +65,11 @@ describe "Goals pages" do
         end
 
         it "should redirect to the show page" do
-          save_and_open_page
           click_link_or_button "Mark 'em done!"
           page.should have_content(goal.description)
         end
       end
 
-      # after do
-      #   click_button "Mark 'em done!"
-      # end
-
-      # describe "'New Project' creates a new project in the database" do
-      #         before do
-      #           fill_in "Name", with: "Googly Moogly"
-      #           fill_in "Description", with: "F'in things up!"
-      #         end
-      #
-      #         it "should create the project" do
-      #           expect { click_button 'Create Project'}.to change(Project, :count).by(1)
-      #         end
-      #
-      #         describe "displays the project in the list of projects" do
-      #           before { click_button 'Create Project' }
-      #           it { should have_content("Googly Moogly") }
-      #           it { should have_content("F'in things up!") }
-      #         end
-
     end # when logged in
-  end # goals#show
+  end # goals#edit
 end

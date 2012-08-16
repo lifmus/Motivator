@@ -17,11 +17,6 @@
    }
 });
 
-
-
-
-
-
 function stripeResponseHandler(status, response)
 {
    if (response.error) {
