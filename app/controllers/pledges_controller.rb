@@ -16,7 +16,7 @@ class PledgesController < ApplicationController
           redirect_to new_creditcard_path(:goal_id => @goal), notice: 'Pledge was successfully created.'
         end
       else
-        render action: "new"
+        render action: "new", notice: "Please re-enter pledge amount"
       end
   end
 

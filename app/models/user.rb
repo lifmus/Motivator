@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :goals
   # has_many :charges, :through => :goals
   has_many :pledges, :through => :goals
-  validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  # validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  validates :phone_number, :format => /\d\d\d\d\d\d\d\d\d\d/,
+                           :allow_blank => true
 
 
   # Setup accessible (or protected) attributes for your model
@@ -49,22 +51,37 @@ class User < ActiveRecord::Base
     end
   end
 
-  def charge_card(amount, user, goal)
-    charge = Stripe::Charge.create(
-      :amount => amount, # in cents
-      :currency => "usd",
-      :customer => user.stripe_customer_id
+  def create_stripe_customer_id(stripeToken)
+    description = self.name ? self.name : "not given"
+    customer = Stripe::Customer.create(
+      :card => stripeToken,
+      :email => email,
+      :description => description
     )
+    self.stripe_customer_id = customer.id
+    self.save
+  end
+
+  def charge_card(amount, user, goal)
+    # charge = Stripe::Charge.create(
+    #   :amount => amount, # in cents
+    #   :currency => "usd",
+    #   :customer => user.stripe_customer_id
+    # )
 
     # charges.create
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
+    # Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "initial charge")
+    Charge.create :amount => amount,
+                  :goal_id => goal.id,
+                  # :stripe_charge_id => charge.id,
+                  :transaction_type => "initial charge"
   end
 
   def refund_money(amount, stripe_charge_id, goal)
-    charge = Stripe::Charge.retrieve(stripe_charge_id)
-    charge.refund(:amount => amount)
+    # charge = Stripe::Charge.retrieve(stripe_charge_id)
+    # charge.refund(:amount => amount)
 
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => stripe_charge_id, :transaction_type => "refund")
   end
 
   def self.refund_all_goals_for_previous_week
@@ -72,7 +89,5 @@ class User < ActiveRecord::Base
       user.goals.each { |goal| goal.weekly_goal_refund }
     end
   end
-
-
 
 end

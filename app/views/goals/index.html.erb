@@ -1,20 +1,13 @@
 <% if signed_in? %>
   <div class="span12">
     <h1>Here are your existing goals:</h1> <br/>
-
     <% @goals.each do |goal| %>
-
       <div class="well sidebar-nav row span4">
-
         <div class="profile_picture span1"><%= profile_pic_for goal.user %></div>
-
         <div class="span2">
           <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
-
           <%= render :partial => "progress", :locals => { :goal => goal } %>
-
         </div>
-
       </div>
     <% end %>
   </div>
@@ -24,23 +17,17 @@
 <br />
 
 <div class="span12">
-<h1>Here are all of the public goals:</h1>
-
-<br />
-<% @public_goals.each do |goal| %>
-<div class="well sidebar-nav row span4">
-
-  <div class="profile_picture span1"><%= profile_pic_for goal.user %></div>
-
-  <div class="span2">
-    <%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
-
-    <%= render :partial => "progress", :locals => { :goal => goal } %>
-  </div>
-
-</div>
-<% end %>
-
+	<h1>Here are all of the public goals:</h1>
+	<br />
+		<% @public_goals.each do |goal| %>
+			<div class="well sidebar-nav row span4">
+  			<div class="profile_picture span1"><%= profile_pic_for goal.user %></div>
+  			<div class="span2">
+    		<%= link_to "#{goal.description} (#{goal.percentage_complete}% Complete)", goal %>
+    		<%= render :partial => "progress", :locals => { :goal => goal } %>
+  			</div>
+			</div>
+		<% end %>
 </div>
 
 

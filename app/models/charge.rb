@@ -3,20 +3,24 @@ class Charge < ActiveRecord::Base
 
   belongs_to :goal
 
-  # before_create :ping_stripe
-
   scope :initial_charge, where(:transaction_type => 'initial charge')
 
-  # def refund
-  #   where(:transaction_type => 'refund')
-  # end
-  #
-  # def ping_stripe
-  #   if transaction_type == 'initial charge'
-  #     get_money
-  #   else
-  #     refund_money
-  #   end
-  # end
+  after_create :send_to_stripe
+
+  def send_to_stripe(opts = {})
+    if self.transaction_type == "refund"
+      charge = Stripe::Charge.retrieve(stripe_charge_id)
+      charge.refund(:amount => amount)
+    else
+      charge = Stripe::Charge.create(
+        :amount => amount, # in cents
+        :currency => "usd",
+        :customer => goal.user.stripe_customer_id
+      )
+    end
+
+    self.stripe_charge_id = charge.id
+    self.save
+  end
 
 end

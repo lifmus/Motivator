@@ -49,7 +49,7 @@ describe Goal do
       @due_date = Time.now.to_date + 4.weeks
       @goal = Goal.create(:created_at => @started_date, :user_id => 1, :due_date => @due_date, :description => "Become a Black Belt")
       @goal.objectives.create(:description => "Go to Karate Class", :frequency => 3)
-      @goal.build_pledge(:amount => 450)
+      @goal.create_pledge(:amount => 450)
     end
 
     it "calculates the duration in weeks" do
@@ -108,10 +108,18 @@ describe Goal do
       @goal.pledge_amount_earned_back.should eq 56.25 # 57
     end
 
+    describe "#initial_charge" do
+      it "has an initial charge"
+    end
+
   end
 
-  describe "#initial_charge" do
-    it "has an initial charge"
+  describe "#readable_date" do
+    let(:goal) { Fabricate(:goal) }
+
+    it "formats the due date to be readable" do
+      goal.readable_date.should eq goal.due_date.to_date.to_formatted_s(:long)
+    end
   end
 
   describe "#step_count_for_previous_period(num = 7)" do

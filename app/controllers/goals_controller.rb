@@ -8,6 +8,11 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    @steps_completed_at = []
+    @steps_by_date = @goal.steps.each do |step|
+      @steps_completed_at << step.completed_at.to_date
+    end
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     if @goal.public == false
       redirect_to goals_path, notice: 'That is a private goal'
     end unless @goal.user == current_user
@@ -32,7 +37,7 @@ class GoalsController < ApplicationController
     @objective = @goal.objectives.first #BUGBUG only works for one objective
     @days = []
     # @objective.build_steps
-    7.times { | num | @days << Time.now.at_beginning_of_week + num.days }
+    7.times { | num | @days << Time.now - num.days }
   end
 
   def update

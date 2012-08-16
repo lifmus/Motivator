@@ -23,7 +23,8 @@ describe "Pledge pages" do
         fill_in "goal[description]", :with => goal.description
         fill_in "goal[due_date]", :with => goal.due_date
         fill_in "goal[objectives_attributes][0][description]", :with => goal.objectives.first.description
-        fill_in "goal[objectives_attributes][0][frequency]", :with => goal.objectives.first.frequency
+        # fill_in "goal[objectives_attributes][0][frequency]", :with => goal.objectives.first.frequency
+        select("3", :from => "goal_objectives_attributes_0_frequency")
         click_button "I'm ready to get motivated"
       end
 
