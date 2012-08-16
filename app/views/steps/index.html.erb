@@ -1,0 +1,15 @@
+<% @steps.each do |step|%>
+<%= link_to "Step #{step.id}", step_path(step) %>  <%= link_to "Edit step #{step.id}", edit_step_path(step) %><br />
+
+
+
+<div id="images">
+  <% @steps.each do |step| %>
+    <div class="image">
+      <%= image_tag step.image_url.to_s %>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+
+<% end %>

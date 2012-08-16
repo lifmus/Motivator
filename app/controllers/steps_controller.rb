@@ -1,7 +1,19 @@
 class StepsController < ApplicationController
 
-  def new
+  def index
+    @steps = current_user.steps.all
+  end
 
+  def update
+    @step = current_user.steps.find(params[:id])
+    @step.image = params[:step][:image]
+    @step.save
+    redirect_to steps_path
+  end
+
+
+  def edit
+    @step = current_user.steps.find(params[:id])
   end
 
   def create
@@ -12,6 +24,16 @@ class StepsController < ApplicationController
     else
       redirect_to :back, alert: 'You already recorded that step today'
     end
+  end
+
+  def show
+    @step = current_user.steps.find(params[:id])
+  end
+
+
+  def new
+    @step = current_user.steps.find(params[:id])
+
   end
 
 end

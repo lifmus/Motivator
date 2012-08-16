@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :goals
   # has_many :charges, :through => :goals
   has_many :pledges, :through => :goals
+  has_many :objectives, :through => :goals
+  has_many :steps, :through => :goals, :through => :objectives
   validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
 
 
