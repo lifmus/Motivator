@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
     # charge = Stripe::Charge.retrieve(stripe_charge_id)
     # charge.refund(:amount => amount)
 
-    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => charge.id, :transaction_type => "refund")
+    Charge.create(:amount => amount, :goal_id => goal.id, :stripe_charge_id => stripe_charge_id, :transaction_type => "refund")
   end
 
   def self.refund_all_goals_for_previous_week
