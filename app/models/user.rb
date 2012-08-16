@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :goals
   # has_many :charges, :through => :goals
   has_many :pledges, :through => :goals
-  validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  # validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
+  validates :phone_number, :format => /\d\d\d\d\d\d\d\d\d\d/,
+                           :allow_blank => true
 
 
   # Setup accessible (or protected) attributes for your model
