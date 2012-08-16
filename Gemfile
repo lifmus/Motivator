@@ -9,7 +9,9 @@ gem "omniauth-facebook"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'validates_timeliness', '~> 3.0'
 gem 'twilio-ruby'
-gem 'carrierwave'
+gem 'carrierwave', '0.6.0'
+gem 'fog', '0.5.3'
+gem 'aws-s3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
