@@ -35,7 +35,12 @@ class Goal < ActiveRecord::Base
   end
 
   def percentage_complete
-    ((self.objectives.first.steps.count.to_f / total_steps) * 100 ).floor
+    completed = ((self.objectives.first.steps.count.to_f / total_steps) * 100 ).floor
+    if completed > 100
+      100
+    else
+      completed
+    end
   end
 
   def expected_percentage_complete
@@ -58,7 +63,12 @@ class Goal < ActiveRecord::Base
   end
 
   def pledge_amount_earned_back
-    self.step_value * self.objectives.first.steps.count
+    earned = self.step_value * self.objectives.first.steps.count 
+      if earned > self.pledge_amount
+        self.pledge_amount
+      else
+        earned
+      end    
   end
 
   def initial_charge

@@ -37,7 +37,7 @@ class GoalsController < ApplicationController
     @objective = @goal.objectives.first #BUGBUG only works for one objective
     @days = []
     # @objective.build_steps
-    7.times { | num | @days << Time.now.at_beginning_of_week + num.days }
+    7.times { | num | @days << Time.now - num.days }
   end
 
   def update
