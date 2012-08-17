@@ -1,8 +1,17 @@
-Project by Andrew Lin, David Ladowitz, Jeremy Reyes, and Jessie Young.
+Project by:
 
-Motivator is a tool for motivating yourself. Oftentimes, we say we want to do things, and we really do intend to do them, but life happens and all of the sudden we've spent ten years saying we want to learn to play the guitar without taking a single lesson. Motivator is here to change that.
+Andrew Lin: https://github.com/lifmus
+David Ladowitz: https://github.com/dladowitz 
+Jeremy Reyes: https://github.com/djreyes
+Jessie Young: https://github.com/jessieayoung
 
-Declare your goal, decide on steps to achieve your goal, and then put your money where your mouth is. Once you've pledged a dollar amount, you can see how much of your pledge you've earned back through taking steps toward your goal. If you fulfill your promise to yourself, you will get your money back in full PLUS the satisfaction of having achieved what you set out to do.
+Check it out in production mode here: http://dbcmotivator.herokuapp.com/
+
+Motivator is a tool for motivating yourself. Declare your goal, decide on steps to achieve your goal, and then put your money where your mouth is. Once you've pledged a dollar amount, you can see how much of your pledge you've earned back through taking steps toward your goal. If you fulfill your promise to yourself, you will get your money back in full PLUS the satisfaction of having achieved what you set out to do.
 
 Are you ready to get motivated?
+
+Special thanks to Stripe's awesome payments API: https://github.com/stripe
+
+And HUGE shout out to Devbootcamp, without which none of this would have been possible: https://github.com/devbootcamp
 
