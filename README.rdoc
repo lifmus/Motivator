@@ -1,9 +1,9 @@
 Project by:
 
-Andrew Lin: https://github.com/lifmus
-David Ladowitz: https://github.com/dladowitz 
-Jeremy Reyes: https://github.com/djreyes
-Jessie Young: https://github.com/jessieayoung
+* Andrew Lin: https://github.com/lifmus
+* David Ladowitz: https://github.com/dladowitz 
+* Jeremy Reyes: https://github.com/djreyes
+* Jessie Young: https://github.com/jessieayoung
 
 Check it out in production mode here: http://dbcmotivator.herokuapp.com/
 
