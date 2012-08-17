@@ -95,21 +95,18 @@ describe Goal do
       @goal = Goal.create(:created_at => @started_date, :user_id => 1, :due_date => @due_date, :description => "Become a Black Belt")
       @objective = @goal.objectives.create(:description => "Go to Karate Class", :frequency => 3)
       @goal.build_pledge(:amount => "450")
-      @objective.steps.create(:completed_at => @started_date + 1.week)
-      @objective.steps.create(:completed_at => @started_date + 2.weeks)
-      @objective.steps.create(:completed_at => @started_date + 3.weeks)
+      @objective.steps.create(:completed_at => @started_date + 4.weeks)
+      @objective.steps.create(:completed_at => @started_date + 5.weeks)
+      @objective.steps.create(:completed_at => @started_date + 6.weeks)
     end
 
+  describe "pledge amount methods" do
     it "has a total pledge amount" do
       @goal.pledge_amount.should eq 450
     end
 
     it "calculates the pledge amount earned" do
       @goal.pledge_amount_earned_back.should eq 56.25 # 57
-    end
-
-    describe "#initial_charge" do
-      it "has an initial charge"
     end
 
   end
@@ -121,19 +118,22 @@ describe Goal do
       goal.readable_date.should eq goal.due_date.to_date.to_formatted_s(:long)
     end
   end
-
-  describe "#step_count_for_previous_period(num = 7)" do
-    it "counts the completed steps for a previous period"
+  
+  
+  describe "#finished_date" do
+    
+    it "returns nil if the goal isn't finished" do
+      @goal.finished_date.should be nil 
+    end
+    
+    it "returns date of last step if finished" do
+      20.times {|i| @objective.steps.create(:completed_at => @started_date + (i+1).days) }
+       last_step = @objective.steps.create(:completed_at => @started_date + 8.weeks) 
+       @goal.steps.count.should eq @goal.total_steps
+       @goal.finished_date.should eq last_step.completed_at
+    end
   end
 
-  describe "#refund_amount_for_previous_week" do
-    it "calculates the amount to be refunded for the previous week"
   end
-
-  describe "#weekly_goal_refund" do
-    it "refunds the amount for the previous week to the user"
-    it "increments the pledge's refunded back amount"
-  end
-
 end
 

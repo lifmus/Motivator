@@ -43,7 +43,9 @@ Expected progress:
 		<% if @steps_completed_at.include? date %>
 			<ul class="unstyled centerize">
 				<li><i class="icon-ok"></i><br /></li>
-				
+		<% end %>
+		<% if @goal.finished_date && @goal.finished_date.to_date == date %>
+				<li><%= image_tag "success_baby.jpeg" %></li>
 			</ul>
 		<% end %>
 	<% end %>

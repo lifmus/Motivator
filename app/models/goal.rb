@@ -2,13 +2,25 @@ class Goal < ActiveRecord::Base
   attr_accessible :description, :due_date, :user_id, :objectives_attributes, :created_at, :public
   validates_presence_of :user_id, :description, :due_date
   belongs_to :user
-  has_many :objectives, :inverse_of => :goal
+  has_many :objectives, :inverse_of => :goal, :dependent => :destroy
   has_many :steps, :through => :objectives
   has_many :charges
   has_one :pledge
   accepts_nested_attributes_for :objectives
   validates_datetime :due_date, :on_or_after => :two_weeks_ahead, :on_or_before => :one_year_ahead
   validates_length_of :description, :maximum => 140
+
+  def last_step
+    # self.steps[self.total_steps - 1]
+    sorted = self.steps.all(:order => :completed_at)
+    sorted[self.total_steps - 1]
+  end
+
+  def finished_date
+    if self.steps.count >= self.total_steps
+      self.last_step.completed_at
+    end
+  end
 
   def readable_date
     self.due_date.to_date.to_formatted_s(:long)
@@ -63,11 +75,11 @@ class Goal < ActiveRecord::Base
   end
 
   def pledge_amount_earned_back
-    earned = self.step_value * self.objectives.first.steps.count
-      if earned > self.pledge_amount
+    @earned = self.step_value * self.objectives.first.steps.count
+      if @earned > self.pledge_amount
         self.pledge_amount
       else
-        earned
+        @earned
       end
   end
 

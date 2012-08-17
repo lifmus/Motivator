@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  has_many :goals
+  has_many :goals, :dependent => :destroy
   # has_many :charges, :through => :goals
-  has_many :pledges, :through => :goals
+  has_many :pledges, :through => :goals, :dependent => :destroy
   # validates_format_of :phone_number, :with => /\d\d\d\d\d\d\d\d\d\d/
   validates :phone_number, :format => /\d\d\d\d\d\d\d\d\d\d/,
                            :allow_blank => true
